@@ -69,9 +69,9 @@
 
   /* ── Layout ── */
   --max-w:   1320px; /* Maximum width of the content column */
-  --gutter:  clamp(1.25rem, 3vw, 2.5rem);
+  --gutter:  clamp(1.75rem, 3vw, 2.5rem);
   /* clamp(min, preferred, max) means:
-     never less than 1.25rem (20px), scale with 3% of viewport width,
+     never less than 1.75rem (28px), scale with 3% of viewport width,
      never more than 2.5rem (40px) */
 }
 
