@@ -1,0 +1,1468 @@
+/* ============================================================
+   styles.css — Yuxuan Lin · Composer, Sound Artist, Creative Technologist
+   Aesthetic: Steinway piano — lacquered black, ivory white, polished gold
+
+   HOW THIS FILE IS ORGANIZED:
+   1. Google Fonts import
+   2. CSS Variables (the design tokens — change these to retheme the whole site)
+   3. Reset (neutralizes browser default styles)
+   4. Base body styles
+   5. Layout container (.wrap)
+   6. Header & navigation
+   7. Hero section
+   8. Generic page intro
+   9. Footer
+   10. Buttons
+   11. Works list (catalogue rows + filter bar)
+   12. Performances (calendar rows)
+   13. Bio (version switcher + copy buttons + meta grid)
+   14. Media (video grid)
+   15. Contact form
+   16. Portrait / photo frames
+   17. Utility classes
+   ============================================================ */
+
+
+/* ─────────────────────────────────────────────────────────────
+   1. GOOGLE FONTS
+   Loads three typefaces from Google Fonts:
+   · Fraunces     — display / heading font (editorial, high-contrast serif)
+   · Cormorant Garamond — body serif (elegant, readable at small sizes)
+   · JetBrains Mono — monospace (labels, metadata, code)
+   The 'display=swap' parameter means text shows in a fallback
+   font while the custom fonts download, preventing invisible text.
+───────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,400&family=JetBrains+Mono:wght@300;400;500&display=swap');
+
+
+/* ─────────────────────────────────────────────────────────────
+   2. CSS CUSTOM PROPERTIES (DESIGN TOKENS)
+   :root is the document root — variables defined here are
+   available everywhere in the file.
+
+   To re-theme the entire site, change only these six color
+   values and the three font names. Nothing else needs editing.
+
+   Color naming convention:
+   --paper      white — page background
+   --ink        deep navy blue — absolute, total
+   --accent     vivid blue — hardware, hinges, the brand nameplate
+   --signal     bright sky blue — bright highlight for hover / active states
+───────────────────────────────────────────────────────────── */
+:root {
+  /* ── Colour palette (user's Figma sky-blue ramp) ── */
+  --paper:        #ffffff;   /* Pure white — page background */
+  --paper-warm:   #ffffff;   /* Pure white — cards and panels, flush with the page background */
+  --ink:          #07141E;   /* Darkest step — primary text, and the dark header background */
+  --ink-soft:     #193345;   /* Very dark blue — secondary text on light backgrounds */
+  --ink-faint:    #2D5570;   /* Dark-mid blue — labels, metadata, captions */
+  --rule:         #07141E18; /* Barely-there divider lines */
+  --accent:       #42799E;   /* Mid blue — the nameplate, hardware, active states */
+  --accent-soft:  #42799E18; /* Faint blue wash — hover backgrounds */
+  --signal:       #599FCF;   /* Bright mid-light blue — highlights inside dark panels */
+  --grain-opacity: 0.0;    /* Subtle grain — adds surface texture, like lacquer close up */
+
+  /* ── Typography ── */
+  --font-display: 'Fraunces', 'Cormorant Garamond', serif;  /* Headings */
+  --font-serif:   'Cormorant Garamond', Georgia, serif;      /* Body text */
+  --font-mono:    'JetBrains Mono', ui-monospace, monospace; /* Labels / code */
+
+  /* ── Layout ── */
+  --max-w:   1320px; /* Maximum width of the content column */
+  --gutter:  clamp(1.25rem, 3vw, 2.5rem);
+  /* clamp(min, preferred, max) means:
+     never less than 1.25rem (20px), scale with 3% of viewport width,
+     never more than 2.5rem (40px) */
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   3. RESET
+   Browser default styles vary between Chrome, Firefox, Safari.
+   This block normalises them to a predictable baseline.
+───────────────────────────────────────────────────────────── */
+/* box-sizing: border-box means padding and border are included
+   inside an element's declared width/height (not added on top) */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Remove default margin and padding from html and body */
+html, body { margin: 0; padding: 0; }
+
+/* Images and SVGs display as blocks to avoid the mysterious
+   gap that inline images get from descender space */
+img, svg { display: block; max-width: 100%; }
+
+/* Buttons inherit the page font instead of showing the
+   browser's ugly default system font */
+button { font: inherit; cursor: pointer; }
+
+/* Links inherit text color and have no underline by default;
+   we add underlines selectively where they're needed */
+a { color: inherit; text-decoration: none; }
+
+
+/* ─────────────────────────────────────────────────────────────
+   4. BASE BODY STYLES
+───────────────────────────────────────────────────────────── */
+/* smooth-scroll: anchor links (#section) glide instead of jumping */
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: 20px;       /* Base font size — rem units scale from this */
+  line-height: 1.55;     /* Comfortable vertical spacing between lines */
+  -webkit-font-smoothing: antialiased; /* Crisper text on macOS/iOS */
+  text-rendering: optimizeLegibility;  /* Enables kerning and ligatures */
+  /* CSS OpenType features: ligatures (fi, fl), kerning, old-style numerals */
+  font-feature-settings: 'liga', 'kern', 'onum';
+  position: relative;    /* Needed so the ::before grain overlay is positioned relative to body */
+  overflow-x: hidden;    /* Prevent horizontal scrollbar from layout overflow */
+}
+
+/* PAPER GRAIN TEXTURE
+   A faint noise texture overlaid on every page to simulate
+   the look of textured paper. It's a tiny SVG filter rendered
+   as a data URI (the svg is embedded directly in the CSS).
+   pointer-events: none makes it invisible to mouse clicks.
+   z-index: 1000 keeps it on top of everything visually,
+   but mix-blend-mode: multiply means dark pixels blend with
+   whatever's underneath rather than covering it. */
+body::before {
+  content: '';           /* ::before requires content to render */
+  position: fixed;       /* Stays in place even when you scroll */
+  inset: 0;              /* Shorthand for top:0 right:0 bottom:0 left:0 */
+  pointer-events: none;  /* Can't be clicked */
+  z-index: 1000;         /* Renders above all page content */
+  opacity: var(--grain-opacity); /* Uses the variable defined in :root */
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  mix-blend-mode: multiply; /* Dark grain pixels multiply with page colors */
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   5. LAYOUT CONTAINER
+   .wrap is applied to sections that should be centred and
+   constrained to --max-w. Think of it as the page gutter.
+───────────────────────────────────────────────────────────── */
+.wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;           /* Center horizontally */
+  padding: 0 var(--gutter); /* Left/right breathing room */
+}
+
+
+/* ============================================================
+   6. HEADER
+   The sticky header sits at the top of the viewport as you
+   scroll. It contains the logo/brand and the navigation links.
+============================================================ */
+.site-header {
+  border-bottom: 1px solid var(--rule);
+  padding: 1.4rem 0 1.2rem;
+  position: sticky; /* Sticks to the top of the scroll window */
+  top: 0;
+  background: var(--ink);
+  z-index: 100;     /* Floats above all page content */
+  /* backdrop-filter: blur creates a frosted-glass effect on
+     browsers that support it, so content scrolling behind
+     the header looks slightly blurred */
+  backdrop-filter: blur(6px);
+}
+
+/* A solid rule drawn at the very bottom of the header
+   using the ::after pseudo-element (a second decorative line
+   below the main border) */
+.site-header::after {
+  content: '';
+  display: block;
+  height: 1px;
+  background: var(--paper);
+  /* Negative margin extends the line full-width beyond the .wrap padding */
+  margin: 0.9rem calc(-1 * var(--gutter)) -1.2rem;
+  opacity: 0.85;
+}
+
+/* Flex row: brand on the left, nav on the right, baseline-aligned */
+.header-inner {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+/* BRAND / LOGO — the name and subtitle in the top-left */
+.brand {
+  font-family: var(--font-display);
+  font-weight: 450;
+  font-size: clamp(1.95rem, 3.1vw, 2.5rem);
+  letter-spacing: -0.01em;
+  line-height: 1;
+  font-variation-settings: 'opsz' 144;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+/* Logo mark — no background, just the SVG logo */
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.95rem;
+  height: 2.95rem;
+  color: var(--paper);
+  padding: 0.1rem;
+  transition: color 0.3s;
+}
+.brand-mark svg {
+  display: block;
+  width: 110%;
+  height: 110%;
+}
+/* The logo SVG is two-tone: the outer shape uses currentColor
+   (controlled by .brand-mark's color above), and the inner
+   detail paths are hardcoded fill="white" in the markup. On the
+   dark header, the outer shape is now light, so the inner
+   details need to flip to dark to stay visible against it. */
+.brand-mark svg path[fill="white"] {
+  fill: var(--ink);
+}
+.brand:hover .brand-mark {
+  color: var(--accent);
+}
+/* Wraps the name + subtitle text */
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  color: var(--paper);
+  transition: color 0.3s;
+}
+.brand:hover .brand-text {
+  color: var(--accent);
+}
+/* The subtitle beneath the name */
+.brand small {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--paper);
+  margin-top: 0.45rem;
+}
+
+/* PRIMARY NAVIGATION — the row of page links */
+nav.primary {
+  font-family: var(--font-mono);
+  font-size: 0.80rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap; /* Links wrap to a second line on small screens */
+}
+nav.primary a {
+  position: relative;  /* Needed so ::after (the underline) can position itself */
+  padding-bottom: 0.2rem;
+  color: var(--paper);
+  transition: color 0.25s; /* Smooth color change on hover */
+}
+/* Animated underline: starts as a zero-width line (right: 100%)
+   and expands to full width (right: 0) on hover */
+nav.primary a::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 100%; /* Start: invisible (0 width) */
+  bottom: 0;
+  height: 1px;
+  background: var(--accent);
+  /* cubic-bezier easing gives the underline a snappy reveal */
+  transition: right 0.35s cubic-bezier(0.7,0,0.2,1);
+}
+nav.primary a:hover { color: var(--accent); }
+nav.primary a:hover::after { right: 0; } /* Full width on hover */
+
+/* .active is added by JavaScript to the link matching the current page */
+nav.primary a.active { color: var(--accent); }
+nav.primary a.active::after { right: 0; }
+
+/* LANGUAGE SWITCHER */
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding-left: 1rem;
+  border-left: 1px solid rgba(255,255,255,0.25);
+  margin-left: 0.2rem;
+}
+.lang-btn {
+  background: none;
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--paper);
+  cursor: pointer;
+  padding: 0 0 0.2rem;
+  position: relative;
+  transition: color 0.25s;
+}
+.lang-btn::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 100%;
+  bottom: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: right 0.35s cubic-bezier(0.7,0,0.2,1);
+}
+.lang-btn.active { color: var(--accent); }
+.lang-btn.active::after { right: 0; }
+.lang-btn:hover { color: var(--accent); }
+.lang-btn:hover::after { right: 0; }
+
+/* HAMBURGER BUTTON — only visible on mobile (shown via @media below) */
+.nav-toggle {
+  display: none;  /* Hidden by default; shown on small screens */
+  background: none;
+  border: 1px solid var(--paper);
+  color: var(--paper);
+  padding: 0.4rem 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* MOBILE NAVIGATION — applies when the viewport is 780px or narrower */
+@media (max-width: 780px) {
+  .header-inner { align-items: center; } /* Center-align since nav is hidden */
+  .nav-toggle { display: inline-block; } /* Show the "Menu" button */
+
+  /* The nav becomes an absolute dropdown that appears below the header */
+  nav.primary {
+    position: absolute; /* Positioned relative to .site-header */
+    top: 100%;          /* Appear directly below the header */
+    right: var(--gutter);
+    background: var(--paper-warm);
+    border: 1px solid var(--ink);
+    flex-direction: column; /* Stack links vertically */
+    gap: 0.9rem;
+    padding: 1.2rem 1.4rem;
+    display: none; /* Hidden until "Menu" is clicked */
+  }
+  /* The dropdown panel keeps its original light background, so its
+     links stay dark/readable here even though nav links are white
+     up in the dark header bar itself */
+  nav.primary a { color: var(--ink-soft); }
+  nav.primary a:hover, nav.primary a.active { color: var(--accent); }
+  /* JavaScript adds .open to show the nav */
+  nav.primary.open { display: flex; }
+}
+
+
+/* ============================================================
+   7. HERO SECTION
+   The large introductory block on the homepage (index.html).
+   Contains the big headline, lead paragraph, and CTA buttons.
+============================================================ */
+/* ── HOMEPAGE HERO — split layout ───────────────────────────
+   Two-column grid: portrait photo on the LEFT, text on the RIGHT.
+   Fills most of the viewport height so the photo is impactful.
+   On mobile (≤760px) stacks vertically: photo on top, text below. */
+.hero-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 92vh;
+}
+
+/* Left column — the photo fills it completely */
+.hero-photo {
+  position: relative;
+  overflow: hidden;
+  background: var(--ink);
+}
+.hero-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+
+/* Right column — text, vertically centered, with comfortable padding */
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(3rem, 6vw, 6rem) clamp(2rem, 5vw, 5rem);
+  background: var(--paper);
+  position: relative; /* Needed so .waveform can be absolutely positioned */
+}
+
+/* Mobile — stack photo above text */
+@media (max-width: 760px) {
+  .hero-split              { grid-template-columns: 1fr; min-height: auto; }
+  .hero-photo              { height: 70vw; min-height: 280px; }
+  .hero-text               { padding: 2.5rem var(--gutter); }
+}
+
+/* Legacy .hero class — kept in case it's referenced elsewhere */
+.hero {
+  padding: clamp(3rem, 8vw, 7rem) 0 clamp(2rem, 5vw, 4rem);
+  position: relative;
+}
+
+/* EYEBROW — the small "№ 01 — Index" label above the headline */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.4rem;
+}
+/* A short horizontal rule before the eyebrow text */
+.eyebrow::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--ink);
+}
+
+/* DISPLAY HEADING (h1) — the large homepage headline */
+h1.display {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(2.6rem, 8vw, 6.4rem); /* Scales dramatically with viewport */
+  line-height: 0.95;   /* Tight leading for display text */
+  letter-spacing: -0.025em; /* Slight tightening on large headlines */
+  margin: 0;
+  font-variation-settings: 'opsz' 144, 'SOFT' 30;
+}
+/* Italic crimson <em> text within the h1 */
+h1.display em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--accent);
+  font-variation-settings: 'opsz' 144, 'SOFT' 100;
+}
+
+/* SECTION HEADING (h2) — used on content sections across all pages */
+h2.section {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  letter-spacing: -0.015em;
+  line-height: 1.05;
+  margin: 0 0 2rem;
+  font-variation-settings: 'opsz' 144;
+}
+h2.section em { font-style: italic; color: var(--accent); }
+
+/* h3 — card titles, sidebar labels */
+h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.45rem;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.5rem;
+}
+
+/* LEAD PARAGRAPH — the italic intro sentence beneath the headline */
+.lead {
+  font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+  line-height: 1.5;
+  max-width: 38ch; /* ch = width of the "0" character — limits line length */
+  color: var(--ink-soft);
+  font-style: italic;
+  font-weight: 300;
+}
+
+p { margin: 0 0 1rem; }
+
+/* WAVEFORM SVG — the faint audio-waveform line at the bottom of the hero.
+   It's decorative only (aria-hidden="true" hides it from screen readers).
+   position: absolute sits it inside .hero (which has position: relative) */
+.waveform {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 1.5rem;
+  height: 60px;
+  opacity: 0.32;
+  pointer-events: none; /* Can't be accidentally clicked */
+}
+.waveform svg { width: 100%; height: 100%; }
+.waveform path {
+  stroke: var(--ink);
+  stroke-width: 0.6;
+  fill: none; /* The path is a line, not a shape — no fill */
+}
+
+
+/* ============================================================
+   8. GENERIC PAGE INTRO
+   The two-column header block at the top of every interior page
+   (Works, Performances, Bio, etc.). Left column = title,
+   right column = lead paragraph.
+============================================================ */
+.page-intro {
+  padding: clamp(2.4rem, 6vw, 5rem) 0 clamp(2rem, 4vw, 3rem);
+  border-bottom: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 1fr 1.4fr; /* Left column slightly narrower */
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: end; /* Align to the bottom of the grid cells */
+}
+.page-intro .lead { margin: 0; max-width: 48ch; }
+
+/* Stack columns vertically on narrow screens */
+@media (max-width: 780px) {
+  .page-intro { grid-template-columns: 1fr; gap: 1.5rem; }
+}
+
+
+/* ============================================================
+   9. FOOTER
+   The three-column footer row at the bottom of every page.
+   Uses flexbox so the three items spread across the width.
+============================================================ */
+.site-footer {
+  margin-top: 6rem;
+  padding: 3rem 0 2rem;
+  border-top: 1px solid var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between; /* Spread children to opposite edges */
+  flex-wrap: wrap;  /* Stack on very narrow screens */
+  gap: 1rem;
+}
+.site-footer a:hover { color: var(--accent); }
+
+
+/* ============================================================
+   10. BUTTONS
+   Two variants: solid (.btn) and ghost outline (.btn.ghost).
+   Both use the mono font for a technical / label look.
+============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: var(--ink);   /* Solid black fill */
+  color: var(--paper);      /* White text */
+  border: 1px solid var(--ink);
+  transition: background 0.25s, color 0.25s; /* Smooth color change on hover */
+}
+.btn:hover { background: var(--accent); border-color: var(--accent); }
+
+/* Ghost variant: transparent background, dark border */
+.btn.ghost { background: transparent; color: var(--ink); }
+.btn.ghost:hover { background: var(--ink); color: var(--paper); }
+
+/* The arrow "→" inside buttons slides right on hover */
+.btn .arrow { transition: transform 0.3s; }
+.btn:hover .arrow { transform: translateX(4px); }
+
+
+/* ============================================================
+   11. WORKS LIST — compositions catalogue
+   A table-like layout built with CSS Grid.
+   Each .work-row is a five-column grid:
+   Year | Title | Description | Instrumentation | Duration
+============================================================ */
+.works-list {
+  border-top: 1px solid var(--ink);
+}
+
+.work-row {
+  display: grid;
+  grid-template-columns: 90px 1fr 1.2fr 80px;
+  gap: 1.5rem;
+  align-items: baseline;
+  padding: 1.6rem 0;
+  border-bottom: 1px solid var(--rule);
+  cursor: pointer;
+  transition: padding 0.3s, background 0.3s;
+  text-decoration: none;
+  color: inherit;
+}
+.work-row:hover {
+  padding-left: 1rem;
+  background: linear-gradient(90deg, var(--accent-soft), transparent 60%);
+}
+/* No video and no score available — the row isn't a link, so it
+   shouldn't look or behave like one */
+.work-row.no-link {
+  cursor: default;
+}
+.work-row.no-link:hover {
+  padding-left: 0;
+  background: none;
+}
+.work-row.no-link:hover .work-title { color: inherit; }
+.work-row:hover .work-title { color: var(--accent); }
+
+.work-year {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+  letter-spacing: 0.05em;
+}
+.work-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  transition: color 0.25s;
+}
+.work-meta {
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  line-height: 1.4;
+}
+.work-duration {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+  text-align: right;
+}
+
+@media (max-width: 880px) {
+  .work-row { grid-template-columns: 60px 1fr 70px; gap: 1rem; }
+  .work-meta { grid-column: 2; }
+}
+
+/* ── WORK DETAIL PAGE ────────────────────────────────────────
+   Layout for the individual work page (work.html).
+   Single column, top to bottom: basic info (metadata + program
+   note), performances, video, score preview — video and score
+   are both full-width so they read at the same visual size.
+─────────────────────────────────────────────────────────── */
+.work-basic-info {
+  padding: 3rem 0 1.5rem;
+}
+
+/* Program note text */
+.work-program-note h2,
+.work-performances h2,
+.work-video-section h2,
+.work-score-preview h2 {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0 0 1.2rem;
+  font-weight: 400;
+}
+.work-program-note p { font-size: 1.05rem; line-height: 1.7; }
+
+/* Video section */
+.work-video-section { padding: 1rem 0 3rem; }
+.work-video-wrap {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--ink);
+  overflow: hidden;
+}
+.work-video-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.work-video-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+}
+/* Caption overlay in the bottom-left corner of a video — used for
+   crediting a specific recording (e.g. a benefit-concert program
+   listing) rather than the work itself */
+.work-video-caption {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  max-width: 70%;
+  padding: 0.7rem 0.9rem;
+  background: rgba(8, 8, 8, 0.6);
+  color: rgba(255,255,255,0.92);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  line-height: 1.6;
+  pointer-events: none; /* Doesn't block clicks on the video player beneath it */
+}
+
+/* Performances list */
+.work-performances { padding: 3rem 0; border-top: 1px solid var(--rule); }
+.perf-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 1fr;
+  gap: 1.5rem;
+  align-items: baseline;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 1rem;
+}
+.perf-date {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-faint);
+  letter-spacing: 0.08em;
+}
+@media (max-width: 600px) {
+  .perf-row { grid-template-columns: 1fr; gap: 0.3rem; }
+}
+
+/* Score preview strip */
+.work-score-preview { padding: 3rem 0 5rem; }
+/* Issuu embed — full-width, tall enough to read comfortably */
+.issuu-wrap {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  border: 1px solid var(--rule);
+  background: var(--paper-warm);
+  overflow: hidden;
+}
+.issuu-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+@media (max-width: 600px) { .issuu-wrap { height: 420px; } }
+
+/* FILTER BAR — the row of category buttons above the works list */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0 0 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+.filter-bar button {
+  background: transparent;
+  border: 1px solid var(--ink);
+  padding: 0.45rem 0.95rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink);
+  transition: background 0.2s, color 0.2s;
+}
+.filter-bar button:hover { background: var(--ink); color: var(--paper); }
+/* .active is added by JavaScript to the currently selected filter */
+.filter-bar button.active { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+
+
+/* ============================================================
+   12. PERFORMANCES
+   Calendar-style rows for upcoming and past concerts.
+   Each row: Date | Venue | Program | Tag
+============================================================ */
+.perf-section { padding: clamp(2rem, 5vw, 4rem) 0; }
+
+/* Section heading with a hairline rule extending to the right */
+.perf-section h2 { display: flex; align-items: baseline; gap: 1rem; }
+.perf-section h2::after {
+  content: '';
+  flex: 1; /* Takes up all remaining space, pushing the line to the right edge */
+  height: 1px;
+  background: var(--rule);
+  align-self: center;
+}
+
+/* Four-column row: Date | Venue | Program | Tag */
+.perf-row {
+  display: grid;
+  grid-template-columns: 130px 1fr 1.3fr 100px;
+  gap: 1.5rem;
+  align-items: start;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--rule);
+  transition: padding 0.3s;
+}
+.perf-row:hover { padding-left: 0.8rem; }
+
+/* Date column — month/day/year stacked vertically */
+.perf-row .date {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  line-height: 1.4;
+}
+/* The large day number */
+.perf-row .date .day {
+  font-size: 1.6rem;
+  display: block;
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-top: 0.2rem;
+}
+/* Upcoming performances: day shown in crimson */
+.perf-row.upcoming .day { color: var(--accent); }
+
+/* Venue name and city */
+.perf-row .venue { font-family: var(--font-display); font-size: 1.25rem; line-height: 1.2; }
+.perf-row .venue small {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-top: 0.3rem;
+  font-style: italic;
+}
+
+/* Program description — what's being performed */
+.perf-row .program { font-size: 0.95rem; color: var(--ink-soft); }
+.perf-row .program em { font-size: 1.3rem; color: var(--ink); } /* Work titles in full ink, sized up */
+
+/* Category tag: "Premiere", "Tickets", "Past", etc. */
+.perf-row .tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--ink);
+  align-self: start; /* Don't stretch to fill the row height */
+  text-align: center;
+}
+/* Upcoming: filled crimson tag */
+.perf-row.upcoming .tag { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+
+/* Narrow screen: two-column layout (Date | everything else) */
+@media (max-width: 880px) {
+  .perf-row { grid-template-columns: 90px 1fr; }
+  /* Program and tag wrap below the venue in column 2 */
+  .perf-row .program, .perf-row .tag { grid-column: 2; }
+}
+
+
+/* ============================================================
+   13. BIO PAGE
+   Three-tab switcher (Short / Medium / Long) and a metadata grid.
+============================================================ */
+/* The button-group switcher: a row of buttons sharing a border */
+.bio-switch {
+  display: inline-flex;
+  border: 1px solid var(--ink);
+  margin-bottom: 2.5rem;
+}
+.bio-switch button {
+  background: transparent;
+  border: none;
+  padding: 0.7rem 1.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink);
+  border-right: 1px solid var(--ink); /* Divider between buttons */
+}
+.bio-switch button:last-child { border-right: none; } /* No divider after last */
+/* Active tab: filled black */
+.bio-switch button.active { background: var(--ink); color: var(--paper); }
+
+/* Bio article blocks — hidden by default, shown by JavaScript */
+.bio-version { display: none; max-width: 68ch; }
+.bio-version.active { display: block; } /* JavaScript adds .active */
+
+.bio-version p {
+  font-size: 1.15rem;
+  line-height: 1.65;
+  margin-bottom: 1.2rem;
+}
+/* DROP CAP — the large decorative first letter on the bio paragraphs.
+   float: left pulls the letter out of flow; the text wraps around it. */
+.bio-version p:first-of-type::first-letter {
+  font-family: var(--font-display);
+  font-size: 4.2rem;
+  font-style: italic;
+  font-weight: 400;
+  float: left;
+  line-height: 0.85;
+  padding: 0.4rem 0.6rem 0 0;
+  color: var(--accent);
+}
+
+/* BIO METADATA GRID — pronouns, location, training, awards, etc.
+   auto-fit + minmax means columns are created as space allows,
+   each at least 220px wide */
+.bio-meta {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+}
+/* <dt> = definition term (the label) */
+.bio-meta dt {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 0.5rem;
+}
+/* <dd> = definition description (the value) */
+.bio-meta dd {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+}
+
+.bio-meta dd a {
+  text-decoration: underline;
+}
+.bio-meta dd a:hover {
+  color: var(--accent);
+}
+
+.bio-meta .awards-group dd {
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.bio-meta .training-group dd {
+  margin-bottom: 0.9rem;
+}
+
+/* "Copy" button beside each bio heading */
+.copy-btn {
+  margin-left: 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: transparent;
+  border: 1px solid var(--ink-faint);
+  padding: 0.3rem 0.6rem;
+  color: var(--ink-faint);
+  transition: all 0.2s;
+}
+.copy-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+
+/* ============================================================
+   14. MEDIA GRID — video embeds on the Media page
+   A responsive grid of 16:9 video boxes. Two columns on wide
+   screens, one column (stacked) below 780px.
+
+   HOW TO ADD A VIDEO
+   Copy any <div class="media-video"> block in projects.html (this
+   page kept its original filename), paste it above the "ADD NEW
+   VIDEOS" comment, and replace the iframe src with a YouTube embed
+   URL (https://www.youtube.com/embed/ID) — not the youtu.be link.
+============================================================ */
+.media-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+@media (max-width: 780px) {
+  .media-grid { grid-template-columns: 1fr; }
+}
+.media-video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--ink);
+  overflow: hidden;
+}
+.media-video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+/* Photo boxes — same footprint as .media-video, but for a plain
+   <img> instead of a video iframe */
+.media-photo {
+  position: relative;
+  aspect-ratio: 2 / 3; /* Portrait, matching the source photos — not the 16:9 videos above */
+  background: var(--paper-warm);
+  overflow: hidden;
+}
+.media-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Fills the box, cropping rather than squishing */
+}
+
+/* Photo page grid (photos.html) — three columns instead of the
+   Media page's two, and a wider gap, so each photo sits smaller
+   and further apart. Individual boxes still use .media-photo. */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  margin-top: 2rem;
+}
+@media (max-width: 980px) {
+  .photo-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+}
+@media (max-width: 560px) {
+  .photo-grid { grid-template-columns: 1fr; }
+}
+
+
+/* ============================================================
+   15. CONTACT FORM
+   Two-column layout: info on the left, form on the right.
+============================================================ */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  margin-top: 2rem;
+}
+/* Stack on narrow screens */
+@media (max-width: 880px) { .contact-grid { grid-template-columns: 1fr; } }
+
+/* Definition list used for contact info (Email, Social, etc.) */
+.contact-info dt {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-top: 1.4rem;
+  margin-bottom: 0.3rem;
+}
+.contact-info dt:first-child { margin-top: 0; }
+.contact-info dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.4rem;
+  line-height: 1.3;
+}
+.contact-info dd a { border-bottom: 1px solid var(--rule); transition: border-color 0.2s; }
+.contact-info dd a:hover { color: var(--accent); border-color: var(--accent); }
+
+/* Form layout: each field is a label + input stacked vertically */
+form.contact-form { display: flex; flex-direction: column; gap: 1.3rem; }
+.field { display: flex; flex-direction: column; gap: 0.4rem; }
+.field label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+/* Inputs use only a bottom border for a minimal look */
+.field input,
+.field textarea,
+.field select {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--ink);
+  padding: 0.5rem 0;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--ink);
+  transition: border-color 0.2s;
+}
+/* On focus: border changes to crimson, outline removed */
+.field input:focus,
+.field textarea:focus,
+.field select:focus { outline: none; border-color: var(--accent); }
+.field textarea { resize: vertical; min-height: 130px; } /* Can resize vertically only */
+
+/* Status message shown after submission (success or error) */
+.form-status {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+
+
+/* ============================================================
+   16. PORTRAIT / PHOTO FRAMES
+   Reusable bordered frames for composer photos.
+   Used on the homepage, bio page, and contact page.
+
+   HOW TO ADD A PHOTO:
+   Find the matching HTML comment that says "ADD PHOTO HERE",
+   then add this line inside the .portrait-frame element:
+     <img src="assets/your-photo.jpg" alt="Yuxuan Lin" />
+
+   The frame shows a striped placeholder until a real image is added.
+   object-fit: cover means the image fills the frame perfectly —
+   it crops rather than squishes, keeping faces in proportion.
+============================================================ */
+
+/* The outer container — controls width and spacing */
+.portrait-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+/* The bordered frame itself.
+   The diagonal stripe background acts as the placeholder pattern —
+   it disappears once an <img> is added inside. */
+.portrait-frame {
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--paper-warm);
+  background-image:
+    repeating-linear-gradient(45deg, transparent 0, transparent 8px, var(--rule) 8px, var(--rule) 9px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The "no photo yet" label shown inside the placeholder */
+.portrait-frame .portrait-placeholder-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  text-align: center;
+  padding: 1rem;
+  pointer-events: none;
+}
+
+/* Once an <img> is added, it fills the frame completely */
+.portrait-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;     /* Crops to fill — never squishes or stretches */
+  object-position: top;  /* Default: anchor to the top so faces stay in frame */
+  position: absolute;    /* Covers the entire frame including the placeholder */
+  inset: 0;
+}
+
+/* Photo credit / caption line below the frame */
+.portrait-caption {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0;
+}
+
+/* ── ASPECT RATIO VARIANTS ──────────────────────────────────
+   Add one of these classes to .portrait-frame to set its shape.
+   The frame height is calculated automatically from its width. */
+.portrait-frame.ratio-portrait  { aspect-ratio: 2 / 3; } /* Tall — classic headshot or editorial */
+.portrait-frame.ratio-square    { aspect-ratio: 1 / 1; } /* Square — social / profile crop */
+.portrait-frame.ratio-landscape { aspect-ratio: 3 / 2; } /* Wide — stage shot or environmental */
+.portrait-frame.ratio-cinema    { aspect-ratio: 16 / 9; }/* Very wide — banner or performance */
+
+/* ── BIO HERO — full-bleed portrait background ───────────────
+   The bio text section sits on top of the portrait photo,
+   which covers the entire section as a background layer.
+   Three z-index layers: photo (0) → overlay (1) → text (2). */
+.bio-hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--ink);
+  height: clamp(640px, 63vw, 960px); /* Scales with viewport to show full portrait image */
+}
+
+/* The photo layer — covers only the left 42% of the section.
+   Increase the width % to make the photo larger; decrease to zoom out more. */
+.bio-hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 42%;
+  z-index: 0;
+}
+.bio-hero-bg img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Placeholder label shown when no photo is present yet */
+.bio-hero-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.12);
+}
+
+/* Gradient overlay — transparent on the left (photo shows) fading to dark
+   on the right where the text column lives. The fade starts at ~30% from
+   the left and becomes fully opaque by ~58%, matching where the text begins. */
+.bio-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to right,
+    rgba(8,8,8,0)    0%,
+    rgba(8,8,8,0)    38%,
+    rgba(8,8,8,0.90) 54%,
+    rgba(8,8,8,0.90) 100%
+  );
+}
+
+/* .wrap inside .bio-hero — fills the fixed-height section, centers text vertically */
+.bio-hero-wrap {
+  position: relative;
+  z-index: 2;
+  height: 100%;           /* Fill the fixed 640px hero height */
+  display: flex;
+  align-items: flex-start;
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+}
+
+/* Text column — pushed to the RIGHT; scrollable so long bios don't expand the frame */
+.bio-hero-content {
+  color: #ffffff;
+  max-width: 60ch;
+  margin-left: auto;
+  max-height: 580px;      /* Cap height so the long bio scrolls within the fixed frame */
+  overflow-y: auto;
+  padding-right: 0.25rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.18) transparent;
+}
+
+/* Mobile — let the section be taller and use a solid overlay instead of gradient */
+@media (max-width: 720px) {
+  .bio-hero           { height: auto; min-height: 480px; }
+  .bio-hero-overlay   { background: rgba(8,8,8,0.68); }
+  .bio-hero-wrap      { height: auto; padding-top: 3rem; padding-bottom: 3rem; }
+  .bio-hero-content   { margin-left: 0; max-height: none; overflow-y: visible; }
+}
+
+/* Bio switcher buttons — adapted for dark background */
+.bio-hero-content .bio-switch {
+  border-color: rgba(255, 255, 255, 0.25);
+}
+.bio-hero-content .bio-switch button {
+  color: rgba(255, 255, 255, 0.55);
+  border-right-color: rgba(255, 255, 255, 0.25);
+}
+.bio-hero-content .bio-switch button.active {
+  background: var(--accent);
+  color: var(--ink);
+  border-color: var(--accent);
+}
+.bio-hero-content .bio-switch button:hover:not(.active) {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Copy buttons — adapted for dark background */
+.bio-hero-content .copy-btn {
+  color: rgba(255, 255, 255, 0.45);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.bio-hero-content .copy-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Drop cap — gold on dark background */
+.bio-hero-content .bio-version p:first-of-type::first-letter {
+  color: var(--signal);
+}
+
+/* Photo credit line — sits just below the section */
+.bio-hero-caption {
+  display: block;
+  width: 100%;
+  margin: 0;                /* Remove default paragraph margin so no white gap appears */
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-faint);  /* warm stone — readable but unobtrusive */
+  padding: 0.55rem var(--gutter);
+  background: transparent;
+}
+
+/* Photo page credit line — same family as .bio-hero-caption but left
+   in normal case (not uppercase) per request */
+.photo-credit {
+  margin: 0 auto;
+  padding-bottom: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-faint);
+  text-align: right;
+}
+
+/* ============================================================
+   17. UTILITIES
+   Small reusable helper classes used across multiple pages.
+============================================================ */
+/* Full-width horizontal rule */
+.divider {
+  height: 1px;
+  background: var(--rule);
+  margin: 3rem 0;
+}
+
+/* Responsive vertical spacers */
+.spacer-lg { height: clamp(3rem, 7vw, 6rem); }
+.spacer-md { height: clamp(1.5rem, 3vw, 2.5rem); }
+
+/* .subtle — monospace label style used throughout for secondary text */
+.subtle {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+html[lang="zh-CN"] .subtle {
+  font-size: 1.05rem;
+}
+
+html[lang="zh-CN"] .lead {
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+}
+
+/* ============================================================
+   18. LINKS PAGE — performer/collaborator directory
+   Each category (.links-category) holds a multi-column list
+   (.links-list) of name + role entries.
+============================================================ */
+.links-category { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+.links-category:last-child { margin-bottom: 0; }
+
+.links-category-heading {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.6rem;
+  margin: 0 0 1.5rem;
+}
+
+.links-list {
+  column-count: 3;
+  column-gap: 3rem;
+}
+.links-list p {
+  margin: 0 0 0.8rem;
+  break-inside: avoid;
+}
+.links-list .name {
+  display: block;
+  font-size: 1rem;
+  color: var(--ink);
+}
+.links-list a.name {
+  display: inline-block;
+  line-height: 1;
+  padding-bottom: 0.05em;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  transition: color 0.2s;
+}
+.links-list a.name:hover {
+  color: var(--accent);
+}
+.links-list .role {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-top: 0.1rem;
+}
+
+.links-empty {
+  font-style: italic;
+  color: var(--ink-faint);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 980px) { .links-list { column-count: 2; } }
+@media (max-width: 620px) { .links-list { column-count: 1; } }
+
+
+/* ── PAGE-LOAD REVEAL ANIMATION ──
+   Elements with class .reveal start invisible (opacity: 0)
+   and slide up into view. Stagger delays (.d1–.d4) create a
+   sequential cascade effect on the homepage hero.
+   The animation runs once and stays at the final state
+   (forwards) — no reset. */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px); /* Start 20px below final position */
+  animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+/* Delay classes — each element starts slightly later than the previous */
+.reveal.d1 { animation-delay: 0.1s; }
+.reveal.d2 { animation-delay: 0.25s; }
+.reveal.d3 { animation-delay: 0.4s; }
+.reveal.d4 { animation-delay: 0.55s; }
+
+/* The keyframe: from the starting state (defined on .reveal above)
+   to fully visible and in its natural position */
+@keyframes rise {
+  to { opacity: 1; transform: translateY(0); }
+}

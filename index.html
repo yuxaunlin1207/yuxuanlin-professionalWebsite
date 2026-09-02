@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<!-- REMINDER: If you edit this file directly, tell Claude afterward — related data files (works-data.js, i18n.js, etc.) may need updating to match. -->
+<!-- DOCTYPE tells the browser this is a modern HTML5 document -->
+
+<html lang="en">
+<!-- lang="en" tells screen readers and search engines the page is in English -->
+
+<head>
+<!-- Everything inside <head> is invisible to visitors but important
+     for the browser, search engines, and social-media previews -->
+
+  <!-- Character encoding: UTF-8 supports every language and emoji -->
+  <meta charset="UTF-8" />
+
+  <!-- Viewport: tells mobile browsers not to shrink the page.
+       initial-scale=1.0 means no zoom on load -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Tab title and bookmark label -->
+  <title>Yuxuan Lin — Composer · Sound Artist · Creative Technologist</title>
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
+
+  <!-- Description shown in Google search results under the page title.
+       Keep it under ~155 characters. -->
+  <meta name="description" content="The works, performances, and projects of Yuxuan Lin — composer and sound artist working at the intersection of music and AI." />
+
+  <!-- SEO / SOCIAL SHARING — uses the real domain (yuxuanlin.com,
+       purchased on Namecheap). Canonical, og:url, and the Person
+       schema's "url" field all point here. This same block is
+       copied onto every page's <head>. -->
+  <link rel="canonical" href="https://yuxuanlin.com/" />
+
+  <!-- Open Graph — controls how the link looks when shared on
+       Facebook, iMessage, Slack, LinkedIn, etc. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Yuxuan Lin — Composer · Sound Artist · Creative Technologist" />
+  <meta property="og:description" content="The works, performances, and projects of Yuxuan Lin — composer and sound artist working at the intersection of music and AI." />
+  <meta property="og:url" content="https://yuxuanlin.com/" />
+  <meta property="og:image" content="https://yuxuanlin.com/assets/YuxuanLinHeadshot%20copy.JPG" />
+
+  <!-- Twitter/X card — falls back to Open Graph tags above if omitted,
+       but summary_large_image gives a bigger preview photo. -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Yuxuan Lin — Composer · Sound Artist · Creative Technologist" />
+  <meta name="twitter:description" content="The works, performances, and projects of Yuxuan Lin — composer and sound artist working at the intersection of music and AI." />
+  <meta name="twitter:image" content="https://yuxuanlin.com/assets/YuxuanLinHeadshot%20copy.JPG" />
+
+  <!-- Structured data (schema.org/Person) — tells Google this page
+       IS Yuxuan Lin, which is what powers the "knowledge panel" card
+       that can appear beside search results for her name. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Yuxuan Lin",
+    "url": "https://yuxuanlin.com/",
+    "image": "https://yuxuanlin.com/assets/YuxuanLinHeadshot%20copy.JPG",
+    "jobTitle": "Composer",
+    "description": "Composer, sound artist, and creative technologist working at the intersection of music and AI.",
+    "sameAs": [
+      "https://www.instagram.com/yuxuanlin_1207/",
+      "https://www.facebook.com/yuxuanlin1207/"
+    ]
+  }
+  </script>
+
+  <!-- Load the CSS stylesheet that controls all visual design -->
+  <link rel="stylesheet" href="styles.css" />
+
+</head>
+
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     SITE HEADER
+     Appears identically at the top of every page.
+     position: sticky (in the CSS) means it stays visible as you scroll.
+     ══════════════════════════════════════════════════════════ -->
+<header class="site-header">
+  <!-- .wrap constrains content to the max width and adds side gutters.
+       .header-inner uses flexbox to space the logo and nav apart. -->
+  <div class="wrap header-inner">
+
+    <!-- LOGO / BRAND — clicking this always returns to the homepage -->
+    <a href="index.html" class="brand">
+      <span class="brand-mark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="1309 155 113 113" aria-hidden="true"><g transform="translate(-73.33)"><path fill="currentColor" d="M1489.47,170.08c-.55-8.5-19.67-14.25-21.2-14.16-21.87-5-52.14-5.8-73.47,5.75-2.26,1.43-6,4.64-6.6,8.41-2,18.34,13.1,57.74,29.71,80.6,11.15,15.43,19.16,16.27,20.92,16.25C1465.81,262,1492.55,189.13,1489.47,170.08Z"/><path fill="white" d="M1410.94,218.24c7,3.74,14.53,10.45,14.51,17.61a.94.94,0,0,0,.94.93h24.89a.93.93,0,0,0,.93-.93h0c0-7.16,7.52-13.87,14.51-17.61a5,5,0,0,0,2.34-6c-4.22-12.26-14.85-43.77-20.19-59.33a133.53,133.53,0,0,0-20-.2c-5.31,15.52-16,47-20.27,59.53A5,5,0,0,0,1410.94,218.24Z"/><path fill="currentColor" d="M1424.57,184.25c4.23-.06,5.34,6,1.45,7.51l7,45h-.89l-7-44.76C1419.68,192.66,1419.07,184.4,1424.57,184.25Z"/><path fill="currentColor" d="M1420.51,200.3c4.29-.05,5.34,6.14,1.37,7.55l7.15,28.93h-.9l-7.1-28.72C1415.58,208.59,1415.13,200.44,1420.51,200.3Z"/><path fill="currentColor" d="M1428.62,168.2c4.23-.06,5.34,6,1.46,7.5l6.54,61.08h-.92l-6.51-60.84C1423.73,176.59,1423.13,168.34,1428.62,168.2Z"/><path fill="currentColor" d="M1449,168.2c-4.23-.06-5.34,6-1.45,7.5L1441,236.78h.93l6.51-60.84C1453.93,176.59,1454.53,168.34,1449,168.2Z"/><path fill="currentColor" d="M1453.13,184.25c-4.23-.06-5.35,6-1.46,7.51l-7,45h.92l7-44.78C1458,192.66,1458.59,184.4,1453.13,184.25Z"/><path fill="currentColor" d="M1457.13,200.3c-4.28-.05-5.34,6.14-1.36,7.55l-7.16,28.93h1l7.09-28.72C1462.13,208.59,1462.58,200.44,1457.13,200.3Z"/><path fill="white" d="M1432.78,247.67c-.06.09.16,2.05-.15,2h-6.32a.15.15,0,0,1-.15-.14V238.72c-.11-.32,2.11-.08,2.2-.15a.15.15,0,0,1,.15.15h0c.14.14-.27,8.83.15,8.8C1428.71,247.59,1433,247.35,1432.78,247.67Z"/><path fill="white" d="M1435.51,245.21l-3.75-6.42a.15.15,0,0,1,.06-.2l.07,0a16.55,16.55,0,0,1,2.54.08l2.26,4.33h.1l2.34-4.33a.13.13,0,0,1,.12-.08h2.3a.13.13,0,0,1,.15.12.12.12,0,0,1,0,.1l-3.76,6.37c-.14.07.18,4.58-.17,4.46-.1-.06-2.32.16-2.22-.14C1435.51,249.4,1435.57,245.27,1435.51,245.21Z"/><path fill="white" d="M1445.42,243.93c.07-.13-3.46-5.41-2.84-5.36a16.33,16.33,0,0,1,2.52.08l2.06,3.87h.09l2.11-3.87a.16.16,0,0,1,.13-.08c.08.09,2.82-.23,2.49.22,0,.15-3.17,5-3,5.19l3.14,5.42c.34.45-2.52.14-2.58.22a.15.15,0,0,1-.13-.07l-2.16-4.07h-.12l-2.28,4.07a.14.14,0,0,1-.12.07h-2.38C1441.72,249.51,1445.63,244.23,1445.42,243.93Z"/></g></svg></span>
+      <span class="brand-text">
+        <span data-i18n="brand.name">Yuxuan&nbsp;Lin</span>
+        <small data-i18n="brand.subtitle">Composer · Sound Artist · Creative Technologist</small>
+      </span>
+    </a>
+
+    <!-- HAMBURGER BUTTON — hidden on desktop, shown on mobile.
+         JavaScript toggles the "open" class on the nav when clicked.
+         aria-label tells screen readers what the button does. -->
+    <button class="nav-toggle" aria-label="Toggle navigation">Menu</button>
+
+    <!-- PRIMARY NAVIGATION — all six pages of the site.
+         JavaScript adds class="active" to whichever link matches
+         the current page, turning it crimson. -->
+    <nav class="primary" aria-label="Primary">
+      <a href="works.html" data-i18n="nav.works">Works</a>
+      <a href="performances.html" data-i18n="nav.performances">Performances</a>
+      <a href="projects.html" data-i18n="nav.projects">Media</a>
+      <a href="photos.html" data-i18n="nav.photos">Photos</a>
+      <a href="bio.html" data-i18n="nav.bio">Bio</a>
+      <a href="links.html" data-i18n="nav.links">Links</a>
+      <a href="contact.html" data-i18n="nav.contact">Contact</a>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="zh">中</button>
+      </div>
+    </nav>
+
+  </div>
+</header>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     MAIN CONTENT
+     <main> tells screen readers and search engines where the
+     primary page content starts.
+     ══════════════════════════════════════════════════════════ -->
+<main>
+
+  <!-- ────────────────────────────────────────────────────────
+       HERO SECTION
+       The large opening statement of the homepage.
+       .wrap centres and constrains the width.
+       .hero sets the generous top/bottom padding.
+       ──────────────────────────────────────────────────────── -->
+  <!-- ────────────────────────────────────────────────────────
+       HOMEPAGE HERO — split layout: photo LEFT, text RIGHT
+       .hero-split is a two-column CSS Grid that fills most of
+       the viewport height. On mobile it stacks: photo on top,
+       text below.
+
+       TO SWAP THE PHOTO:
+       Update the src attribute on the <img> tag below.
+       ──────────────────────────────────────────────────────── -->
+  <section class="hero-split">
+
+    <!-- LEFT: portrait photo — fills the left half -->
+    <div class="hero-photo">
+      <img src="assets/IMG_0280 copy.JPG" alt="Yuxuan Lin"
+           style="object-position: center top;" />
+    </div>
+
+    <!-- RIGHT: text content -->
+    <div class="hero-text">
+
+      <div class="eyebrow reveal d1">
+        <span style="margin-left:auto; font-family:var(--font-mono); font-size:0.7rem;">MMXXVI</span>
+      </div>
+
+      <h1 class="display reveal d2" data-i18n="home.headline">
+        Composing the space between<br/>
+        <em>sound</em> and <em>system</em>.
+      </h1>
+
+      <div class="spacer-md"></div>
+
+      <p class="lead reveal d3" data-i18n="home.lead">
+        Yuxuan Lin writes for acoustic ensembles, designs sound environments,
+        and builds tools that let machines listen back. The work moves between
+        the concert hall, the multimedia stage, and the terminal window.
+      </p>
+
+      <div class="spacer-lg"></div>
+
+      <div class="reveal d4" style="display:flex; gap:1rem; flex-wrap:wrap;">
+        <a href="works.html" class="btn" data-i18n="home.btn.works">Catalogue of works <span class="arrow">→</span></a>
+        <a href="projects.html" class="btn ghost" data-i18n="home.btn.projects">Recent projects</a>
+      </div>
+
+      <!-- Decorative waveform — anchored to the bottom of the text panel -->
+      <div class="waveform" aria-hidden="true">
+        <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
+          <path d="M0,30
+            Q 30,20 60,30 T 120,30 T 180,30 T 240,30 T 300,30
+            Q 330,5 360,30 T 420,30 T 480,30 T 540,30 T 600,30
+            Q 630,55 660,30 T 720,30 T 780,30 T 840,30 T 900,30
+            Q 930,15 960,30 T 1020,30 T 1080,30 T 1140,30 T 1200,30"/>
+        </svg>
+      </div>
+
+    </div><!-- end .hero-text -->
+
+  </section><!-- end .hero-split -->
+
+  <div style="display:grid; grid-template-columns:1fr 1fr;">
+    <p class="portrait-caption" style="padding:0.4rem 1.5rem;">photo by MIDI 觅定 Photography Studio</p>
+    <div style="border-top:1px solid var(--rule);"></div>
+  </div>
+
+  <!-- ────────────────────────────────────────────────────────
+       "CURRENTLY" SECTION
+       A two-column block: left = heading, right = description
+       of what Yuxuan is working on right now.
+       The inline style creates the two-column grid directly
+       (no separate CSS class needed for this one-off layout).
+       ──────────────────────────────────────────────────────── -->
+  <section class="wrap" style="padding: 4rem 0 2rem;">
+    <div style="display:grid; grid-template-columns: 1fr 2fr; gap: clamp(1.5rem, 5vw, 5rem);">
+
+      <!-- Left column: label + section heading -->
+      <div>
+        <div class="subtle" data-i18n="home.currently">Currently</div>
+        <!-- .subtle = small monospace uppercase label (see styles.css utilities) -->
+        <h2 class="section" data-i18n="home.currently.headline" style="margin-top:0.6rem;">
+          On the page<br/><em>& in the patch.</em>
+        </h2>
+      </div>
+
+      <!-- Right column: current project descriptions -->
+      <div>
+        <p style="font-size:1.3rem; line-height:1.6;">
+          Composing <em>In Limbo</em>, a work for symphony orchestra
+          exploring life transitions and the in-between states of being
+          an artist in diaspora.
+        </p>
+        <p style="font-size:1.3rem; line-height:1.6;">
+          In parallel, developing <em>Little Game Sketches</em>, a series of
+          musical interfaces and games built in Max and Processing that
+          explore the space between gameplay and music-making.
+        </p>
+        <!-- Subtle text link — styled as a small underlined label -->
+        <a href="projects.html" class="subtle" data-i18n="home.allprojects"
+           style="display:inline-block; margin-top:1rem; border-bottom:1px solid var(--ink); padding-bottom:0.2rem;">
+          See all projects →
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ────────────────────────────────────────────────────────
+       SELECTED RECENT WORKS
+       A preview of three recent compositions linking to the
+       full catalogue on works.html.
+       Each .work-row uses a four-column CSS Grid defined in styles.css:
+       Year | Title | Description | Duration
+       ──────────────────────────────────────────────────────── -->
+  <section class="wrap" style="padding: 4rem 0;">
+    <h2 class="section" data-i18n="home.recentworks">Selected <em>recent works</em></h2>
+
+    <!-- .works-list wraps all rows and provides the top border line -->
+    <div class="works-list">
+
+      <!-- WORK ROW — each row is a clickable link to a work detail page. -->
+      <a class="work-row" href="work.html?id=laminations">
+        <div class="work-year">2026</div>
+        <div class="work-title">Laminations</div>
+        <div class="work-meta">for interactive sound and video</div>
+        <div class="work-duration">7′</div>
+      </a>
+
+      <a class="work-row" href="work.html?id=time-stretch">
+        <div class="work-year">2026</div>
+        <div class="work-title">Time Stretch</div>
+        <div class="work-meta">for percussion trio</div>
+        <div class="work-duration">12′</div>
+      </a>
+
+      <a class="work-row" href="work.html?id=echoes-in-orbits">
+        <div class="work-year">2026</div>
+        <div class="work-title">Echoes in Orbits</div>
+        <div class="work-meta">for 3 actors, 2 musicians, and 1 dancer, an interdisciplinary collaboration created during the 2026 Juilliard Risk Lab Residency</div>
+        <div class="work-duration">18′</div>
+      </a>
+
+    </div><!-- end .works-list -->
+
+    <!-- "Full catalogue →" link, right-aligned -->
+    <div style="margin-top:2rem; text-align:right;">
+      <a href="works.html" class="subtle" data-i18n="home.fullcatalogue"
+         style="border-bottom:1px solid var(--ink); padding-bottom:0.2rem;">
+        Full catalogue →
+      </a>
+    </div>
+  </section>
+
+</main>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     SITE FOOTER
+     Appears identically at the bottom of every page.
+     Three items spread across the width with flexbox.
+     ══════════════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>© Yuxuan Lin, 2026</div>
+    <div>
+      <a href="contact.html" data-i18n="footer.contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+
+<!-- Load the JavaScript file — placed at the END of <body>
+     so the HTML is fully parsed before the script tries to
+     find and interact with page elements. -->
+<script src="i18n.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

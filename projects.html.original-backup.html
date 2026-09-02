@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<!-- REMINDER: If you edit this file directly, tell Claude afterward — related data files (works-data.js, i18n.js, etc.) may need updating to match. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Yuxuan Lin</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- SITE HEADER — identical on every page. See index.html for full comments. -->
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-mark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="1309 155 113 113" aria-hidden="true"><g transform="translate(-73.33)"><path fill="currentColor" d="M1489.47,170.08c-.55-8.5-19.67-14.25-21.2-14.16-21.87-5-52.14-5.8-73.47,5.75-2.26,1.43-6,4.64-6.6,8.41-2,18.34,13.1,57.74,29.71,80.6,11.15,15.43,19.16,16.27,20.92,16.25C1465.81,262,1492.55,189.13,1489.47,170.08Z"/><path fill="white" d="M1410.94,218.24c7,3.74,14.53,10.45,14.51,17.61a.94.94,0,0,0,.94.93h24.89a.93.93,0,0,0,.93-.93h0c0-7.16,7.52-13.87,14.51-17.61a5,5,0,0,0,2.34-6c-4.22-12.26-14.85-43.77-20.19-59.33a133.53,133.53,0,0,0-20-.2c-5.31,15.52-16,47-20.27,59.53A5,5,0,0,0,1410.94,218.24Z"/><path fill="currentColor" d="M1424.57,184.25c4.23-.06,5.34,6,1.45,7.51l7,45h-.89l-7-44.76C1419.68,192.66,1419.07,184.4,1424.57,184.25Z"/><path fill="currentColor" d="M1420.51,200.3c4.29-.05,5.34,6.14,1.37,7.55l7.15,28.93h-.9l-7.1-28.72C1415.58,208.59,1415.13,200.44,1420.51,200.3Z"/><path fill="currentColor" d="M1428.62,168.2c4.23-.06,5.34,6,1.46,7.5l6.54,61.08h-.92l-6.51-60.84C1423.73,176.59,1423.13,168.34,1428.62,168.2Z"/><path fill="currentColor" d="M1449,168.2c-4.23-.06-5.34,6-1.45,7.5L1441,236.78h.93l6.51-60.84C1453.93,176.59,1454.53,168.34,1449,168.2Z"/><path fill="currentColor" d="M1453.13,184.25c-4.23-.06-5.35,6-1.46,7.51l-7,45h.92l7-44.78C1458,192.66,1458.59,184.4,1453.13,184.25Z"/><path fill="currentColor" d="M1457.13,200.3c-4.28-.05-5.34,6.14-1.36,7.55l-7.16,28.93h1l7.09-28.72C1462.13,208.59,1462.58,200.44,1457.13,200.3Z"/><path fill="white" d="M1432.78,247.67c-.06.09.16,2.05-.15,2h-6.32a.15.15,0,0,1-.15-.14V238.72c-.11-.32,2.11-.08,2.2-.15a.15.15,0,0,1,.15.15h0c.14.14-.27,8.83.15,8.8C1428.71,247.59,1433,247.35,1432.78,247.67Z"/><path fill="white" d="M1435.51,245.21l-3.75-6.42a.15.15,0,0,1,.06-.2l.07,0a16.55,16.55,0,0,1,2.54.08l2.26,4.33h.1l2.34-4.33a.13.13,0,0,1,.12-.08h2.3a.13.13,0,0,1,.15.12.12.12,0,0,1,0,.1l-3.76,6.37c-.14.07.18,4.58-.17,4.46-.1-.06-2.32.16-2.22-.14C1435.51,249.4,1435.57,245.27,1435.51,245.21Z"/><path fill="white" d="M1445.42,243.93c.07-.13-3.46-5.41-2.84-5.36a16.33,16.33,0,0,1,2.52.08l2.06,3.87h.09l2.11-3.87a.16.16,0,0,1,.13-.08c.08.09,2.82-.23,2.49.22,0,.15-3.17,5-3,5.19l3.14,5.42c.34.45-2.52.14-2.58.22a.15.15,0,0,1-.13-.07l-2.16-4.07h-.12l-2.28,4.07a.14.14,0,0,1-.12.07h-2.38C1441.72,249.51,1445.63,244.23,1445.42,243.93Z"/></g></svg></span>
+      <span class="brand-text">
+        <span data-i18n="brand.name">Yuxuan&nbsp;Lin</span>
+        <small data-i18n="brand.subtitle">Composer · Sound Artist · Creative Technologist</small>
+      </span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle navigation">Menu</button>
+    <nav class="primary" aria-label="Primary">
+      <a href="works.html" data-i18n="nav.works">Works</a>
+      <a href="performances.html" data-i18n="nav.performances">Performances</a>
+      <a href="projects.html" data-i18n="nav.projects">Projects</a>
+      <a href="bio.html" data-i18n="nav.bio">Bio</a>
+      <a href="contact.html" data-i18n="nav.contact">Contact</a>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="zh">中</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+
+<main>
+
+  <!-- Background portrait decoration -->
+  <img class="projects-bg-portrait" src="assets/portrait-trace.svg" alt="" aria-hidden="true">
+
+  <!-- PAGE INTRO — two-column header -->
+  <section class="wrap page-intro" style="position:relative; z-index:1;">
+    <div>
+      <h1 class="display" style="font-size:clamp(2.4rem,7vw,5rem);" data-i18n="projects.title">Projects</h1>
+    </div>
+    <p class="lead" data-i18n="projects.lead">
+      Long-form projects, software instruments, and ongoing experiments —
+      somewhere between a composition and a piece of code. Click any tile
+      to open a demo and read the documentation.
+    </p>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════
+       PROJECT GRID
+       A 12-column CSS Grid. Cards span either 6 columns (half-
+       width) or 12 columns (full-width). Every 3rd card auto-
+       matically goes full-width (CSS nth-child rule in styles.css).
+
+       HOW TO ADD A NEW PROJECT CARD
+       Copy any <article class="project-card"> block, paste it
+       above the "ADD NEW PROJECT CARDS" comment, and update the
+       following data-* attributes on the <article> tag:
+
+       data-title       The project title shown in the modal heading.
+       data-kind        Tag line below the heading (e.g. "Code · Library · 2024")
+       data-description A paragraph of text shown in the modal.
+       data-demo        URL for the demo area. Auto-detected:
+                          *.mp3 / *.wav / *.ogg  → audio player
+                          *.mp4 / *.webm          → video player
+                          anything else           → iframe embed
+                        Leave empty ("") to show "Demo coming soon".
+       data-readme      Documentation text shown in the dark terminal panel.
+                        Supports ## Headings and `inline code`.
+                        Use actual newlines (press Enter in the HTML).
+
+       Also update the visible card content:
+         .project-tag  — category label (shown on the card tile)
+         <h3>          — project title on the tile
+         <p>           — one-line description on the tile
+         .project-meta — tech stack tags (Python, SDR, etc.)
+
+       MUSIC vs CODE projects:
+         class="project-card"      → crimson dot tag (music/installation)
+         class="project-card code" → black dot tag (software/code tools)
+       ════════════════════════════════════════════════════════ -->
+  <section class="wrap projects-section" style="padding: 2rem 0 5rem; position:relative; z-index:1;">
+    <div class="project-grid">
+
+      <!-- ─── PROJECT: field-radio.py (CODE) ─────────────── -->
+      <!-- class="project-card code" → black dot on the tag -->
+      <article class="project-card code"
+        data-title="field-radio.py"
+        data-kind="Code · Software Instrument · 2024–"
+        data-description="A small command-line instrument that scans shortwave radio bands, detects pitch and amplitude envelopes, and emits a notated score in real time. Written in Python. Used live in solo performance and as an installation."
+        data-demo="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        data-readme="## Overview
+field-radio.py turns the shortwave radio band into a notation engine. It listens to a software-defined radio (SDR) feed, segments incoming audio into events, and writes them as MIDI plus engraved notation (Lilypond).
+
+## Installation
+`pip install field-radio`
+
+Requires `rtl-sdr` drivers and a compatible USB SDR dongle.
+
+## Usage
+`field-radio --freq 7100 --bandwidth 200 --out session.ly`
+
+## How it works
+A live STFT segmenter feeds onset detection, then a small CNN classifies each event as `pitched`, `noise`, or `silence`. Pitched events are quantized to a microtonal grid and engraved.
+
+## Source
+github.com/yuxuanlin/field-radio (placeholder)
+
+## License
+MIT.">
+        <!-- Visible card content -->
+        <div class="project-tag">Code · Software Instrument</div>
+        <h3>field-radio.py</h3>
+        <p>A command-line instrument that turns shortwave radio into notated music. Built in Python with a small onset-classifier model.</p>
+        <!-- Tech stack tags — these are purely visual labels -->
+        <div class="project-meta">
+          <span>Python</span><span>SDR</span><span>Lilypond</span><span>CLI</span>
+        </div>
+        <!-- Corner arrow — CSS animates this diagonally on hover -->
+        <div class="project-arrow">↗</div>
+      </article>
+
+
+      <!-- ─── PROJECT: Echo Atlas (MUSIC) ──────────────────── -->
+      <!-- No "code" class → crimson dot on the tag -->
+      <article class="project-card"
+        data-title="Echo Atlas"
+        data-kind="Music · Ensemble + AI · 2026"
+        data-description="A 40-minute work for amplified chamber ensemble (10 players) and a real-time listening model. The model analyzes the ensemble's phrasing and projects suggested counterpoint onto each player's tablet — but the players decide, in the moment, whether to follow."
+        data-demo=""
+        data-readme="## Premise
+What if the score is partly written during the performance, by something that has been listening all along?
+
+## Forces
+2 fl / 2 cl / sax · perc · pno · 2 vln · vla · vc · db, all lightly amplified.
+A single MacBook running the listening model.
+
+## The model
+A small transformer (≈12M params) trained on five years of the composer's own rehearsal recordings. It does not generate sound directly — it generates *suggested phrases* on staff notation, displayed to each player in real time.
+
+## Performance notes
+Players are instructed to treat the model's suggestions the way they would treat a sticky note from a trusted colleague: read it, consider it, ignore it if you want.
+
+## Status
+Premiere June 2026, NCPA Beijing.">
+        <div class="project-tag">Music · Ensemble + AI</div>
+        <h3>Echo Atlas</h3>
+        <p>An evening-length work where a small listening model proposes counterpoint to the ensemble in real time — and the ensemble decides what to do with it.</p>
+        <div class="project-meta">
+          <span>Chamber</span><span>Live AI</span><span>40′</span><span>2026 premiere</span>
+        </div>
+        <div class="project-arrow">↗</div>
+      </article>
+
+
+      <!-- ─── PROJECT: Room of Small Bells (INSTALLATION, full-width) ── -->
+      <!-- This is the 3rd card → CSS automatically makes it span all 12 columns -->
+      <article class="project-card"
+        data-title="Room of Small Bells"
+        data-kind="Installation · 2022–"
+        data-description="A sound installation of 36 motorized brass bells, suspended at varying heights and triggered by visitor proximity. The bells learn — a tiny on-device model adjusts each bell's timing slightly each day based on how visitors moved through the space the day before. After a month the room has 'composed' its own slow rhythm."
+        data-demo=""
+        data-readme="## Concept
+Each bell is a node with a microcontroller, a small solenoid, and an infrared distance sensor. Once a day, the room exchanges its movement data with a central Raspberry Pi, which runs a tiny reinforcement-learning loop: bells that triggered too often are quieted; bells that were ignored are made more sensitive.
+
+## Hardware
+36× brass bells, 1.5″–3″
+36× solenoid actuators
+36× ESP32 microcontrollers
+1× Raspberry Pi 5 (controller)
+Acoustic ceiling baffles
+
+## Software
+Firmware: Rust, embedded
+Controller: Python + ONNX runtime, ≈1.2MB model
+
+## Exhibitions
+Shanghai Biennale, 2022 · Mori Art Museum (forthcoming, 2027)
+
+## Documentation
+Full technical notes available on request.">
+        <div class="project-tag">Installation · Hardware + ML</div>
+        <h3>Room of Small Bells</h3>
+        <p>An installation of 36 motorized bells that adapt, slowly, to how visitors move through the room. After a month, the space has composed its own breath.</p>
+        <div class="project-meta">
+          <span>Installation</span><span>Hardware</span><span>Embedded ML</span><span>Shanghai Biennale</span>
+        </div>
+        <div class="project-arrow">↗</div>
+      </article>
+
+
+      <!-- ─── PROJECT: phrase-mirror (CODE) ────────────────── -->
+      <article class="project-card code"
+        data-title="phrase-mirror"
+        data-kind="Code · Library · 2023"
+        data-description="A small Python library for real-time phrase-level audio analysis. Used internally for Echo Atlas and field-radio.py, released as open source for other composers."
+        data-demo=""
+        data-readme="## What
+phrase-mirror is a library that detects musical phrases in real-time monophonic or homophonic audio, returning their pitch contour, rhythmic shape, and a small embedding suitable for similarity search.
+
+## Install
+`pip install phrase-mirror`
+
+## Minimal example
+`from phrase_mirror import Listener`
+`l = Listener(sr=44100)`
+`for phrase in l.stream(microphone()):`
+`    print(phrase.contour, phrase.duration)`
+
+## Why
+Most music-information-retrieval tools are tuned for offline analysis on recorded files. This is tuned for live performance, where you have ~50ms to decide what just happened.
+
+## License
+MIT. github.com/yuxuanlin/phrase-mirror (placeholder)">
+        <div class="project-tag">Code · Library</div>
+        <h3>phrase-mirror</h3>
+        <p>An open-source Python library for real-time phrase-level audio analysis. The plumbing behind several of the music projects on this page.</p>
+        <div class="project-meta">
+          <span>Python</span><span>MIR</span><span>Open Source</span>
+        </div>
+        <div class="project-arrow">↗</div>
+      </article>
+
+
+      <!-- ─── PROJECT: Latent Choir (MUSIC) ────────────────── -->
+      <article class="project-card"
+        data-title="Latent Choir"
+        data-kind="Music · Fixed media · 2024"
+        data-description="An 18-minute work for fixed four-channel tape, derived entirely from a generative voice model trained on the composer's own singing. The model is small, audibly imperfect, and treated as a chorus member — not a tool."
+        data-demo=""
+        data-readme="## Process
+Over six months, I recorded ~40 hours of solo vocalises and trained a small autoregressive voice model on my own voice. The piece is composed by writing a four-voice 'score' and asking the model to render each line.
+
+## What's interesting
+The model occasionally hallucinates words I never sang. I left those in.
+
+## Premiere
+Borderline Festival, Athens, 2024.">
+        <div class="project-tag">Music · Fixed Media</div>
+        <h3>Latent Choir</h3>
+        <p>Four-channel tape made from a small voice model trained on the composer's own singing. The model's imperfections are kept in.</p>
+        <div class="project-meta">
+          <span>Tape</span><span>Voice model</span><span>18′</span>
+        </div>
+        <div class="project-arrow">↗</div>
+      </article>
+
+      <!-- ══ ADD NEW PROJECT CARDS ABOVE THIS LINE ══
+           Copy a complete <article class="project-card"> block,
+           paste it here, and update the data-* attributes and
+           the visible card content. See the guide at the top of
+           this section for a full attribute reference. -->
+
+    </div><!-- end .project-grid -->
+  </section>
+
+</main>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PROJECT MODAL
+     A full-screen panel that slides in when a project card is clicked.
+     JavaScript (initProjectModals in main.js) populates its content
+     from the clicked card's data-* attributes.
+
+     role="dialog" and aria-modal="true" tell screen readers
+     that this is a modal dialog that traps focus.
+
+     STRUCTURE:
+       .modal-close  — "Close ×" button
+       .modal-tag    — filled by JavaScript from data-kind
+       <h2>          — filled by JavaScript from data-title
+       .modal-desc   — filled by JavaScript from data-description
+       .demo         — filled by JavaScript from data-demo
+       .readme       — filled by JavaScript from data-readme
+     ══════════════════════════════════════════════════════════ -->
+<div id="project-modal" class="modal" role="dialog" aria-modal="true">
+  <div class="modal-inner">
+
+    <!-- Close button — top-right corner -->
+    <button class="modal-close" aria-label="Close">Close ×</button>
+
+    <!-- These elements are empty; JavaScript fills them when a card is clicked -->
+    <div class="modal-tag"></div>
+    <h2></h2>
+    <p class="modal-desc" style="font-size:1.15rem; line-height:1.6; color:var(--ink-soft);"></p>
+
+    <!-- Demo embed area — shows audio player, video player, or iframe
+         depending on the data-demo URL, or a placeholder pattern if empty -->
+    <div class="demo">— Demo coming soon —</div>
+
+    <!-- README / documentation panel (dark terminal style) -->
+    <div class="readme"></div>
+
+  </div>
+</div>
+
+<!-- Dark overlay behind the modal.
+     JavaScript adds class="visible" when the modal opens.
+     Clicking the overlay also closes the modal (wired in main.js). -->
+<div id="modal-overlay" class="overlay"></div>
+
+
+<!-- SITE FOOTER — identical on every page -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>© Yuxuan Lin, 2026</div>
+    <div><a href="contact.html" data-i18n="footer.contact">Contact</a> · <a href="#" data-i18n="footer.newsletter">Newsletter</a></div>
+  </div>
+</footer>
+
+<script src="i18n.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

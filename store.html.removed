@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<!-- REMINDER: If you edit this file directly, tell Claude afterward — related data files (works-data.js, i18n.js, etc.) may need updating to match. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Store — Yuxuan Lin</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- SITE HEADER — identical on every page. See index.html for full comments. -->
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-mark"><svg xmlns="http://www.w3.org/2000/svg" viewBox="1309 155 113 113" aria-hidden="true"><g transform="translate(-73.33)"><path fill="currentColor" d="M1489.47,170.08c-.55-8.5-19.67-14.25-21.2-14.16-21.87-5-52.14-5.8-73.47,5.75-2.26,1.43-6,4.64-6.6,8.41-2,18.34,13.1,57.74,29.71,80.6,11.15,15.43,19.16,16.27,20.92,16.25C1465.81,262,1492.55,189.13,1489.47,170.08Z"/><path fill="white" d="M1410.94,218.24c7,3.74,14.53,10.45,14.51,17.61a.94.94,0,0,0,.94.93h24.89a.93.93,0,0,0,.93-.93h0c0-7.16,7.52-13.87,14.51-17.61a5,5,0,0,0,2.34-6c-4.22-12.26-14.85-43.77-20.19-59.33a133.53,133.53,0,0,0-20-.2c-5.31,15.52-16,47-20.27,59.53A5,5,0,0,0,1410.94,218.24Z"/><path fill="currentColor" d="M1424.57,184.25c4.23-.06,5.34,6,1.45,7.51l7,45h-.89l-7-44.76C1419.68,192.66,1419.07,184.4,1424.57,184.25Z"/><path fill="currentColor" d="M1420.51,200.3c4.29-.05,5.34,6.14,1.37,7.55l7.15,28.93h-.9l-7.1-28.72C1415.58,208.59,1415.13,200.44,1420.51,200.3Z"/><path fill="currentColor" d="M1428.62,168.2c4.23-.06,5.34,6,1.46,7.5l6.54,61.08h-.92l-6.51-60.84C1423.73,176.59,1423.13,168.34,1428.62,168.2Z"/><path fill="currentColor" d="M1449,168.2c-4.23-.06-5.34,6-1.45,7.5L1441,236.78h.93l6.51-60.84C1453.93,176.59,1454.53,168.34,1449,168.2Z"/><path fill="currentColor" d="M1453.13,184.25c-4.23-.06-5.35,6-1.46,7.51l-7,45h.92l7-44.78C1458,192.66,1458.59,184.4,1453.13,184.25Z"/><path fill="currentColor" d="M1457.13,200.3c-4.28-.05-5.34,6.14-1.36,7.55l-7.16,28.93h1l7.09-28.72C1462.13,208.59,1462.58,200.44,1457.13,200.3Z"/><path fill="white" d="M1432.78,247.67c-.06.09.16,2.05-.15,2h-6.32a.15.15,0,0,1-.15-.14V238.72c-.11-.32,2.11-.08,2.2-.15a.15.15,0,0,1,.15.15h0c.14.14-.27,8.83.15,8.8C1428.71,247.59,1433,247.35,1432.78,247.67Z"/><path fill="white" d="M1435.51,245.21l-3.75-6.42a.15.15,0,0,1,.06-.2l.07,0a16.55,16.55,0,0,1,2.54.08l2.26,4.33h.1l2.34-4.33a.13.13,0,0,1,.12-.08h2.3a.13.13,0,0,1,.15.12.12.12,0,0,1,0,.1l-3.76,6.37c-.14.07.18,4.58-.17,4.46-.1-.06-2.32.16-2.22-.14C1435.51,249.4,1435.57,245.27,1435.51,245.21Z"/><path fill="white" d="M1445.42,243.93c.07-.13-3.46-5.41-2.84-5.36a16.33,16.33,0,0,1,2.52.08l2.06,3.87h.09l2.11-3.87a.16.16,0,0,1,.13-.08c.08.09,2.82-.23,2.49.22,0,.15-3.17,5-3,5.19l3.14,5.42c.34.45-2.52.14-2.58.22a.15.15,0,0,1-.13-.07l-2.16-4.07h-.12l-2.28,4.07a.14.14,0,0,1-.12.07h-2.38C1441.72,249.51,1445.63,244.23,1445.42,243.93Z"/></g></svg></span>
+      <span class="brand-text">
+        <span data-i18n="brand.name">Yuxuan&nbsp;Lin</span>
+        <small data-i18n="brand.subtitle">Composer · Sound Artist · Creative Technologist</small>
+      </span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle navigation">Menu</button>
+    <nav class="primary" aria-label="Primary">
+      <a href="works.html" data-i18n="nav.works">Works</a>
+      <a href="performances.html" data-i18n="nav.performances">Performances</a>
+      <a href="projects.html" data-i18n="nav.projects">Projects</a>
+      <a href="bio.html" data-i18n="nav.bio">Bio</a>
+      <a href="store.html" data-i18n="nav.store">Store</a>
+      <a href="contact.html" data-i18n="nav.contact">Contact</a>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="zh">中</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+
+<main>
+
+  <!-- PAGE INTRO — two-column header -->
+  <section class="wrap page-intro">
+    <div>
+      <h1 class="display" style="font-size:clamp(2.4rem,7vw,5rem);" data-i18n="store.title">Scores</h1>
+    </div>
+    <p class="lead" data-i18n="store.lead">
+      A small press for the catalogue. Scores are sold as high-resolution
+      PDFs, individually typeset and proofread. Perusal copies on request.
+    </p>
+  </section>
+
+
+  <section class="wrap" style="padding: 2rem 0 5rem;">
+
+    <!-- ════════════════════════════════════════════════════════
+         SCORE GRID
+         .store-grid is a responsive CSS Grid that automatically
+         creates columns as wide as possible, each at least 280px.
+         ════════════════════════════════════════════════════════ -->
+    <div class="store-grid">
+
+      <!-- ════════════════════════════════════════════════════
+           HOW TO ADD A NEW SCORE CARD
+           Copy any <article class="score-card"> block (including
+           all its children, down to the closing </article> tag),
+           paste it above the "ADD NEW SCORES" comment, and update:
+
+           Required attributes on <article>:
+             data-id    — a unique slug, e.g. "my-new-piece"
+                          (no spaces; used internally by the cart)
+             data-title — the piece title as it appears in the cart
+             data-price — price in USD as a number, e.g. 24
+
+           Inside the card:
+             .cover-title     — title text on the score cover
+             first <div>      — instrumentation beneath the title (italic serif)
+             .cover-foot      — bottom line: "Yuxuan Lin · year · YL · catalogue#"
+             <h3>             — title below the cover image
+             .instr           — instrumentation, duration, page count
+             <p>              — one-line description
+             .price           — price displayed to the user, e.g. "$24"
+           ════════════════════════════════════════════════════ -->
+
+      <!-- ─── SCORE CARD: Ternion ─────────────────────────── -->
+      <article class="score-card"
+               data-id="ternion"
+               data-title="Ternion"
+               data-price="35">
+        <div class="score-cover">
+          <div class="cover-title">Ternion</div>
+          <div>
+            <div style="font-family:var(--font-display); font-style:italic; font-size:0.95rem;">for brass trio</div>
+            <div class="cover-foot">Yuxuan Lin · 2025</div>
+          </div>
+          <!-- Three arcs for three brass voices -->
+          <svg viewBox="0 0 100 30" preserveAspectRatio="none">
+            <path d="M10,25 Q 30,5 50,25"  fill="none" stroke="currentColor" stroke-width="0.4"/>
+            <path d="M30,25 Q 50,5 70,25"  fill="none" stroke="currentColor" stroke-width="0.4"/>
+            <path d="M50,25 Q 70,5 90,25"  fill="none" stroke="currentColor" stroke-width="0.4"/>
+          </svg>
+        </div>
+        <h3>Ternion</h3>
+        <div class="instr">Tpt · Hn · Tbn</div>
+        <p style="font-size:0.95rem; color:var(--ink-soft);">Commissioned by The Juilliard School for the 2026 Lunar New Year Recital.</p>
+        <div class="price-row">
+          <div class="price">$35</div>
+          <button class="add-btn">Add to cart</button>
+        </div>
+      </article>
+
+
+      <!-- ─── SCORE CARD: First Pulse ──────────────────────── -->
+      <article class="score-card"
+               data-id="first-pulse"
+               data-title="First Pulse"
+               data-price="35">
+        <div class="score-cover">
+          <div class="cover-title">First<br/>Pulse</div>
+          <div>
+            <div style="font-family:var(--font-display); font-style:italic; font-size:0.95rem;">for flute and electronics</div>
+            <div class="cover-foot">Yuxuan Lin · 2025</div>
+          </div>
+          <!-- Pulse / spike waveform -->
+          <svg viewBox="0 0 100 30" preserveAspectRatio="none">
+            <path d="M0,15 L 20,15 L 22,4 L 24,26 L 26,15 L 50,15 L 52,4 L 54,26 L 56,15 L 80,15 L 82,4 L 84,26 L 86,15 L 100,15"
+                  fill="none" stroke="currentColor" stroke-width="0.4"/>
+          </svg>
+        </div>
+        <h3>First Pulse</h3>
+        <div class="instr">Fl · Electronics</div>
+        <p style="font-size:0.95rem; color:var(--ink-soft);">Written for Robin Meiksins for the 2025 SPLICE Institute. Includes electronics setup notes.</p>
+        <div class="price-row">
+          <div class="price">$35</div>
+          <button class="add-btn">Add to cart</button>
+        </div>
+      </article>
+
+
+      <!-- ─── SCORE CARD: Of Drift and Pulse ───────────────── -->
+      <article class="score-card"
+               data-id="of-drift-and-pulse"
+               data-title="Of Drift and Pulse"
+               data-price="30">
+        <div class="score-cover">
+          <div class="cover-title">Of Drift<br/>and Pulse</div>
+          <div>
+            <div style="font-family:var(--font-display); font-style:italic; font-size:0.95rem;">for alto flute and guitar</div>
+            <div class="cover-foot">Yuxuan Lin · 2025</div>
+          </div>
+          <!-- Gentle drift then pulse -->
+          <svg viewBox="0 0 100 30" preserveAspectRatio="none">
+            <path d="M0,15 Q 20,10 40,15 Q 55,18 60,15 L 62,5 L 64,25 L 66,15 Q 80,12 100,15"
+                  fill="none" stroke="currentColor" stroke-width="0.4"/>
+          </svg>
+        </div>
+        <h3>Of Drift and Pulse</h3>
+        <div class="instr">A. Fl · Gtr</div>
+        <p style="font-size:0.95rem; color:var(--ink-soft);">Written for "Who's in the Lobby" with Jessie Montgomery. Score and parts.</p>
+        <div class="price-row">
+          <div class="price">$30</div>
+          <button class="add-btn">Add to cart</button>
+        </div>
+      </article>
+
+
+      <!-- ─── SCORE CARD: Cyborg ────────────────────────────── -->
+      <article class="score-card"
+               data-id="cyborg"
+               data-title="Cyborg"
+               data-price="40">
+        <div class="score-cover">
+          <div class="cover-title">Cyborg</div>
+          <div>
+            <div style="font-family:var(--font-display); font-style:italic; font-size:0.95rem;">for clarinet, violin and piano</div>
+            <div class="cover-foot">Yuxuan Lin · 2024</div>
+          </div>
+          <!-- Angular/mechanical lines -->
+          <svg viewBox="0 0 100 30" preserveAspectRatio="none">
+            <path d="M0,20 L 15,10 L 30,20 L 45,8 L 60,22 L 75,12 L 100,18"
+                  fill="none" stroke="currentColor" stroke-width="0.4"/>
+          </svg>
+        </div>
+        <h3>Cyborg</h3>
+        <div class="instr">Cl · Vln · Pno</div>
+        <p style="font-size:0.95rem; color:var(--ink-soft);">Commissioned by The Juilliard School. Full score and three parts.</p>
+        <div class="price-row">
+          <div class="price">$40</div>
+          <button class="add-btn">Add to cart</button>
+        </div>
+      </article>
+
+
+      <!-- ─── SCORE CARD: Tresses ───────────────────────────── -->
+      <article class="score-card"
+               data-id="tresses"
+               data-title="Tresses"
+               data-price="35">
+        <div class="score-cover">
+          <div class="cover-title">Tresses</div>
+          <div>
+            <div style="font-family:var(--font-display); font-style:italic; font-size:0.95rem;">for piano quintet</div>
+            <div class="cover-foot">Yuxuan Lin · 2024</div>
+          </div>
+          <!-- Five interwoven strands -->
+          <svg viewBox="0 0 100 30" preserveAspectRatio="none">
+            <path d="M0,8  Q 50,22 100,8"  fill="none" stroke="currentColor" stroke-width="0.3"/>
+            <path d="M0,12 Q 50,26 100,12" fill="none" stroke="currentColor" stroke-width="0.3"/>
+            <path d="M0,15 Q 50,5  100,15" fill="none" stroke="currentColor" stroke-width="0.3"/>
+            <path d="M0,18 Q 50,8  100,18" fill="none" stroke="currentColor" stroke-width="0.3"/>
+            <path d="M0,22 Q 50,12 100,22" fill="none" stroke="currentColor" stroke-width="0.3"/>
+          </svg>
+        </div>
+        <h3>Tresses</h3>
+        <div class="instr">Vln · Vln · Vla · Vc · Pno</div>
+        <p style="font-size:0.95rem; color:var(--ink-soft);">Full score and five parts.</p>
+        <div class="price-row">
+          <div class="price">$35</div>
+          <button class="add-btn">Add to cart</button>
+        </div>
+      </article>
+
+
+      <!-- ─── SCORE CARD: The Guinea Pigs Cello Prize ──────── -->
+      <article class="score-card"
+               data-id="guinea-pigs-cello-prize"
+               data-title='"The Guinea Pigs Cello Prize"'
+               data-price="40">
+        <div class="score-cover">
+          <div class="cover-title" style="font-size:1.1rem;">"The Guinea<br/>Pigs Cello Prize"</div>
+          <div>
+            <div style="font-family:var(--font-display); font-style:italic; font-size:0.95rem;">for undetermined instruments</div>
+            <div class="cover-foot">Yuxuan Lin · 2024</div>
+          </div>
+          <!-- Open/free scatter dots -->
+          <svg viewBox="0 0 100 30" preserveAspectRatio="none">
+            <circle cx="10" cy="15" r="1.2" fill="currentColor"/>
+            <circle cx="25" cy="8"  r="1.2" fill="currentColor"/>
+            <circle cx="40" cy="20" r="1.2" fill="currentColor"/>
+            <circle cx="55" cy="10" r="1.2" fill="currentColor"/>
+            <circle cx="70" cy="22" r="1.2" fill="currentColor"/>
+            <circle cx="85" cy="12" r="1.2" fill="currentColor"/>
+          </svg>
+        </div>
+        <h3>"The Guinea Pigs Cello Prize"</h3>
+        <div class="instr">Undetermined instrumentation</div>
+        <p style="font-size:0.95rem; color:var(--ink-soft);">Flexible scoring. Includes notation guide and performance notes.</p>
+        <div class="price-row">
+          <div class="price">$40</div>
+          <button class="add-btn">Add to cart</button>
+        </div>
+      </article>
+
+
+      <!-- ─── SCORE CARD: Shimmering Veil ─────────────────── -->
+      <article class="score-card"
+               data-id="shimmering-veil"
+               data-title="Shimmering Veil"
+               data-price="35">
+        <div class="score-cover">
+          <div class="cover-title">Shimmering<br/>Veil</div>
+          <div>
+            <div style="font-family:var(--font-display); font-style:italic; font-size:0.95rem;">for string quartet</div>
+            <div class="cover-foot">Yuxuan Lin · 2024</div>
+          </div>
+          <!-- Shimmer: dense overlapping short waves -->
+          <svg viewBox="0 0 100 30" preserveAspectRatio="none">
+            <path d="M0,15 Q 6,10 12,15 T 24,15 T 36,15 T 48,15 T 60,15 T 72,15 T 84,15 T 100,15"
+                  fill="none" stroke="currentColor" stroke-width="0.3"/>
+            <path d="M0,18 Q 6,13 12,18 T 24,18 T 36,18 T 48,18 T 60,18 T 72,18 T 84,18 T 100,18"
+                  fill="none" stroke="currentColor" stroke-width="0.2" opacity="0.5"/>
+          </svg>
+        </div>
+        <h3>Shimmering Veil</h3>
+        <div class="instr">Vln · Vln · Vla · Vc</div>
+        <p style="font-size:0.95rem; color:var(--ink-soft);">Full score and four parts.</p>
+        <div class="price-row">
+          <div class="price">$35</div>
+          <button class="add-btn">Add to cart</button>
+        </div>
+      </article>
+
+
+      <!-- ─── SCORE CARD: The Unspoken ─────────────────────── -->
+      <article class="score-card"
+               data-id="the-unspoken"
+               data-title="The Unspoken"
+               data-price="35">
+        <div class="score-cover">
+          <div class="cover-title">The<br/>Unspoken</div>
+          <div>
+            <div style="font-family:var(--font-display); font-style:italic; font-size:0.95rem;">for pierrot ensemble</div>
+            <div class="cover-foot">Yuxuan Lin · 2024</div>
+          </div>
+          <!-- Six voices: sparse dashes -->
+          <svg viewBox="0 0 100 30" preserveAspectRatio="none">
+            <path d="M5,10  L 18,10"  fill="none" stroke="currentColor" stroke-width="0.4"/>
+            <path d="M25,15 L 40,15"  fill="none" stroke="currentColor" stroke-width="0.4"/>
+            <path d="M48,8  L 58,8"   fill="none" stroke="currentColor" stroke-width="0.4"/>
+            <path d="M62,20 L 75,20"  fill="none" stroke="currentColor" stroke-width="0.4"/>
+            <path d="M80,13 L 92,13"  fill="none" stroke="currentColor" stroke-width="0.4"/>
+            <path d="M35,22 L 50,22"  fill="none" stroke="currentColor" stroke-width="0.4"/>
+          </svg>
+        </div>
+        <h3>The Unspoken</h3>
+        <div class="instr">Fl · Cl · Vln · Vla · Vc · Pno</div>
+        <p style="font-size:0.95rem; color:var(--ink-soft);">Full score and six parts.</p>
+        <div class="price-row">
+          <div class="price">$35</div>
+          <button class="add-btn">Add to cart</button>
+        </div>
+      </article>
+
+
+      <!-- ─── SCORE CARD: Three Miniatures ─────────────────── -->
+      <article class="score-card"
+               data-id="three-miniatures"
+               data-title="Three Miniatures"
+               data-price="25">
+        <div class="score-cover">
+          <div class="cover-title">Three<br/>Miniatures</div>
+          <div>
+            <div style="font-family:var(--font-display); font-style:italic; font-size:0.95rem;">for string trio</div>
+            <div class="cover-foot">Yuxuan Lin · 2023</div>
+          </div>
+          <!-- Three small distinct shapes -->
+          <svg viewBox="0 0 100 30" preserveAspectRatio="none">
+            <path d="M10,20 Q 20,8 30,20"  fill="none" stroke="currentColor" stroke-width="0.5"/>
+            <path d="M42,20 Q 52,8 62,20"  fill="none" stroke="currentColor" stroke-width="0.5"/>
+            <path d="M72,20 Q 82,8 92,20"  fill="none" stroke="currentColor" stroke-width="0.5"/>
+          </svg>
+        </div>
+        <h3>Three Miniatures</h3>
+        <div class="instr">Vln · Vla · Vc</div>
+        <p style="font-size:0.95rem; color:var(--ink-soft);">Full score and three parts.</p>
+        <div class="price-row">
+          <div class="price">$25</div>
+          <button class="add-btn">Add to cart</button>
+        </div>
+      </article>
+
+
+      <!-- ─── SCORE CARD: Cellimba Fusions I ───────────────── -->
+      <article class="score-card"
+               data-id="cellimba-fusions-i"
+               data-title="Cellimba Fusions I"
+               data-price="20">
+        <div class="score-cover">
+          <div class="cover-title">Cellimba<br/>Fusions I</div>
+          <div>
+            <div style="font-family:var(--font-display); font-style:italic; font-size:0.95rem;">for 2 cellos and 2 marimbas</div>
+            <div class="cover-foot">Yuxuan Lin · 2023</div>
+          </div>
+          <!-- Two crossing pairs of lines -->
+          <svg viewBox="0 0 100 30" preserveAspectRatio="none">
+            <path d="M0,8  Q 50,22 100,8"  fill="none" stroke="currentColor" stroke-width="0.4"/>
+            <path d="M0,22 Q 50,8  100,22" fill="none" stroke="currentColor" stroke-width="0.4"/>
+          </svg>
+        </div>
+        <h3>Cellimba Fusions I</h3>
+        <div class="instr">Vc · Vc · Mrb · Mrb</div>
+        <p style="font-size:0.95rem; color:var(--ink-soft);">Full score and four parts.</p>
+        <div class="price-row">
+          <div class="price">$20</div>
+          <button class="add-btn">Add to cart</button>
+        </div>
+      </article>
+
+
+      <!-- ─── SCORE CARD: To Seoul Forest ──────────────────── -->
+      <article class="score-card"
+               data-id="to-seoul-forest"
+               data-title="To Seoul Forest"
+               data-price="30">
+        <div class="score-cover">
+          <div class="cover-title">To Seoul<br/>Forest</div>
+          <div>
+            <div style="font-family:var(--font-display); font-style:italic; font-size:0.95rem;">for pierrot ensemble & vibraphone</div>
+            <div class="cover-foot">Yuxuan Lin · 2023</div>
+          </div>
+          <!-- Layered rising lines like tree canopy -->
+          <svg viewBox="0 0 100 30" preserveAspectRatio="none">
+            <path d="M0,22 Q 25,14 50,18 T 100,22" fill="none" stroke="currentColor" stroke-width="0.3"/>
+            <path d="M0,18 Q 25,10 50,14 T 100,18" fill="none" stroke="currentColor" stroke-width="0.3"/>
+            <path d="M0,14 Q 25,6  50,10 T 100,14" fill="none" stroke="currentColor" stroke-width="0.3"/>
+          </svg>
+        </div>
+        <h3>To Seoul Forest</h3>
+        <div class="instr">Fl · Cl · Vln · Vla · Vc · Pno · Vib</div>
+        <p style="font-size:0.95rem; color:var(--ink-soft);">Full score and seven parts.</p>
+        <div class="price-row">
+          <div class="price">$30</div>
+          <button class="add-btn">Add to cart</button>
+        </div>
+      </article>
+
+
+      <!-- ─── SCORE CARD: One Step Further ─────────────────── -->
+      <article class="score-card"
+               data-id="one-step-further"
+               data-title="One Step Further"
+               data-price="25">
+        <div class="score-cover">
+          <div class="cover-title">One Step<br/>Further</div>
+          <div>
+            <div style="font-family:var(--font-display); font-style:italic; font-size:0.95rem;">for viola and piano</div>
+            <div class="cover-foot">Yuxuan Lin · 2023</div>
+          </div>
+          <!-- Single forward arc -->
+          <svg viewBox="0 0 100 30" preserveAspectRatio="none">
+            <path d="M5,22 Q 52,2 95,22" fill="none" stroke="currentColor" stroke-width="0.5"/>
+          </svg>
+        </div>
+        <h3>One Step Further</h3>
+        <div class="instr">Vla · Pno</div>
+        <p style="font-size:0.95rem; color:var(--ink-soft);">Full score and viola part.</p>
+        <div class="price-row">
+          <div class="price">$25</div>
+          <button class="add-btn">Add to cart</button>
+        </div>
+      </article>
+
+      <!-- ══ ADD NEW SCORE CARDS ABOVE THIS LINE ══
+           Copy a full <article class="score-card"> block above,
+           paste it here, and update the data attributes and
+           all the text content inside. -->
+
+    </div><!-- end .store-grid -->
+
+
+    <!-- ────────────────────────────────────────────────────────
+         PERUSAL & LICENSING INFO
+         Two-column info block below the store grid.
+         ──────────────────────────────────────────────────────── -->
+    <div style="margin-top:3rem; padding-top:2rem; border-top:1px solid var(--rule);
+                display:grid; grid-template-columns:1fr 1fr; gap:2rem;">
+      <div>
+        <h3 style="font-style:italic;" data-i18n="store.perusal.title">Perusal copies & rentals</h3>
+        <p style="color:var(--ink-soft);" data-i18n="store.perusal.body">
+          For programmers, conductors, and reviewers — write to request a
+          watermarked perusal PDF. Large ensemble works are also available
+          for rental.
+        </p>
+        <a href="contact.html" class="btn ghost" style="margin-top:0.5rem;" data-i18n="store.perusal.btn">
+          Request a copy <span class="arrow">→</span>
+        </a>
+      </div>
+      <div>
+        <h3 style="font-style:italic;" data-i18n="store.licensing.title">Licensing</h3>
+        <p style="color:var(--ink-soft);" data-i18n="store.licensing.body">
+          Each purchase includes a single-performer/conductor license.
+          For recordings, broadcasts, or commercial use, please
+          <a href="contact.html" style="border-bottom:1px solid var(--ink);">get in touch</a>.
+        </p>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     CART TOGGLE BUTTON
+     Fixed to the bottom-right corner. Hidden by default;
+     JavaScript adds class="visible" when the cart has items.
+     The <span class="count"> shows the item count inside.
+     ══════════════════════════════════════════════════════════ -->
+<button id="cart-toggle" class="cart-toggle">
+  Cart · <span class="count">0</span>
+</button>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     CART DRAWER
+     A panel that slides in from the right side of the screen.
+     JavaScript adds class="open" to slide it into view.
+     aria-label tells screen readers what this element is.
+
+     STRUCTURE:
+       <h3>         — "Cart" heading + close button
+       .cart-items  — dynamically filled by JavaScript
+       .cart-foot   — total row + checkout button
+     ══════════════════════════════════════════════════════════ -->
+<aside id="cart-drawer" class="cart-drawer" aria-label="Shopping cart">
+
+  <h3>
+    <span>Cart</span>
+    <!-- Close button — JavaScript listens for clicks to close the drawer -->
+    <button class="close-btn" aria-label="Close cart">×</button>
+  </h3>
+
+  <!-- Cart item rows are built and injected here by JavaScript.
+       Initially empty; filled when items are added. -->
+  <div class="cart-items"></div>
+
+  <!-- Footer: total price and checkout button -->
+  <div class="cart-foot">
+    <!-- "Total" label on the left, "$0.00" updated by JavaScript on the right -->
+    <div class="cart-total">
+      <span>Total</span>
+      <span>$0.00</span>
+    </div>
+
+    <!-- CHECKOUT BUTTON
+         Currently shows a demo alert with the cart contents.
+         To enable real payment: see README.md → "Store / cart" section.
+         style="width:100%" makes it span the full drawer width. -->
+    <button class="btn checkout-btn" style="width:100%;">
+      Checkout <span class="arrow">→</span>
+    </button>
+
+    <p class="subtle" style="margin-top:0.8rem; line-height:1.5;">
+      All scores delivered as PDF download. Includes single-performer/conductor license.
+    </p>
+  </div>
+
+</aside>
+
+<!-- Dark overlay behind the cart drawer.
+     JavaScript adds class="visible" when the drawer is open.
+     Clicking the overlay also closes the drawer (wired in main.js). -->
+<div id="cart-overlay" class="overlay"></div>
+
+
+<!-- SITE FOOTER — identical on every page -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>© Yuxuan Lin, 2026</div>
+    <div><a href="contact.html" data-i18n="footer.contact">Contact</a> · <a href="store.html" data-i18n="footer.scores">Scores</a> · <a href="#" data-i18n="footer.newsletter">Newsletter</a></div>
+  </div>
+</footer>
+
+<script src="i18n.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
