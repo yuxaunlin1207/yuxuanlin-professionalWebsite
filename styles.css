@@ -157,7 +157,7 @@ body::before {
    .bio-hero-caption, the mobile nav dropdown's offset — gets the
    same wider, cozier side margin consistently across the site. */
 @media (max-width: 600px) {
-  :root { --gutter: 2.75rem; }
+  :root { --gutter: 2.25rem; }
 }
 
 
