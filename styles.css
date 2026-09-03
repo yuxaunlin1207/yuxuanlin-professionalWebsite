@@ -152,6 +152,12 @@ body::before {
   padding: 0 var(--gutter); /* Left/right breathing room */
 }
 
+/* Phones: much wider side margin than desktop's --gutter gives,
+   so text doesn't feel edge-to-edge on a small screen */
+@media (max-width: 600px) {
+  .wrap { padding: 0 2.75rem; }
+}
+
 
 /* ============================================================
    6. HEADER
