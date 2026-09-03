@@ -152,10 +152,12 @@ body::before {
   padding: 0 var(--gutter); /* Left/right breathing room */
 }
 
-/* Phones: much wider side margin than desktop's --gutter gives,
-   so text doesn't feel edge-to-edge on a small screen */
+/* Phones: redefine --gutter itself (rather than overriding .wrap
+   alone) so every consumer of the variable — .wrap, .hero-text,
+   .bio-hero-caption, the mobile nav dropdown's offset — gets the
+   same wider, cozier side margin consistently across the site. */
 @media (max-width: 600px) {
-  .wrap { padding: 0 2.75rem; }
+  :root { --gutter: 2.75rem; }
 }
 
 
