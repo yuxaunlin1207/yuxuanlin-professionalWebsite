@@ -350,6 +350,11 @@ nav.primary a.active::after { right: 0; }
   .header-inner { align-items: center; } /* Center-align since nav is hidden */
   .nav-toggle { display: inline-block; } /* Show the "Menu" button */
 
+  /* Shrink the subtitle so "Composer · Sound Artist · Creative
+     Technologist" fits on a single line next to the logo/name
+     instead of wrapping onto two or three lines on a phone. */
+  .brand small { font-size: 0.5rem; letter-spacing: 0.04em; }
+
   /* The nav becomes an absolute dropdown that appears below the header */
   nav.primary {
     position: absolute; /* Positioned relative to .site-header */
