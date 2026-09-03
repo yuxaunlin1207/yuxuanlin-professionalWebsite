@@ -69,9 +69,9 @@
 
   /* ── Layout ── */
   --max-w:   1320px; /* Maximum width of the content column */
-  --gutter:  clamp(1.75rem, 3vw, 2.5rem);
+  --gutter:  clamp(1.25rem, 3vw, 2.5rem);
   /* clamp(min, preferred, max) means:
-     never less than 1.75rem (28px), scale with 3% of viewport width,
+     never less than 1.25rem (20px), scale with 3% of viewport width,
      never more than 2.5rem (40px) */
 }
 
@@ -524,8 +524,7 @@ p { margin: 0 0 1rem; }
    right column = lead paragraph.
 ============================================================ */
 .page-intro {
-  padding-top: clamp(2.4rem, 6vw, 5rem);
-  padding-bottom: clamp(2rem, 4vw, 3rem);
+  padding: clamp(2.4rem, 6vw, 5rem) 0 clamp(2rem, 4vw, 3rem);
   border-bottom: 1px solid var(--rule);
   display: grid;
   grid-template-columns: 1fr 1.4fr; /* Left column slightly narrower */
@@ -670,8 +669,7 @@ p { margin: 0 0 1rem; }
    are both full-width so they read at the same visual size.
 ─────────────────────────────────────────────────────────── */
 .work-basic-info {
-  padding-top: 3rem;
-  padding-bottom: 1.5rem;
+  padding: 3rem 0 1.5rem;
 }
 
 /* Program note text */
@@ -690,7 +688,7 @@ p { margin: 0 0 1rem; }
 .work-program-note p { font-size: 1.05rem; line-height: 1.7; }
 
 /* Video section */
-.work-video-section { padding-top: 1rem; padding-bottom: 3rem; }
+.work-video-section { padding: 1rem 0 3rem; }
 .work-video-wrap {
   position: relative;
   aspect-ratio: 16 / 9;
@@ -735,7 +733,7 @@ p { margin: 0 0 1rem; }
 }
 
 /* Performances list */
-.work-performances { padding-top: 3rem; padding-bottom: 3rem; border-top: 1px solid var(--rule); }
+.work-performances { padding: 3rem 0; border-top: 1px solid var(--rule); }
 .perf-row {
   display: grid;
   grid-template-columns: 120px 1fr 1fr;
@@ -756,7 +754,7 @@ p { margin: 0 0 1rem; }
 }
 
 /* Score preview strip */
-.work-score-preview { padding-top: 3rem; padding-bottom: 5rem; }
+.work-score-preview { padding: 3rem 0 5rem; }
 /* Issuu embed — full-width, tall enough to read comfortably */
 .issuu-wrap {
   position: relative;
@@ -805,7 +803,7 @@ p { margin: 0 0 1rem; }
    Calendar-style rows for upcoming and past concerts.
    Each row: Date | Venue | Program | Tag
 ============================================================ */
-.perf-section { padding-top: clamp(2rem, 5vw, 4rem); padding-bottom: clamp(2rem, 5vw, 4rem); }
+.perf-section { padding: clamp(2rem, 5vw, 4rem) 0; }
 
 /* Section heading with a hairline rule extending to the right */
 .perf-section h2 { display: flex; align-items: baseline; gap: 1rem; }
@@ -1475,4 +1473,28 @@ html[lang="zh-CN"] .lead {
    to fully visible and in its natural position */
 @keyframes rise {
   to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ============================================================
+   19. MOBILE-ONLY MARGIN FIX FOR SIX SECTIONS
+   .page-intro, .perf-section, .work-basic-info,
+   .work-performances, .work-video-section, and
+   .work-score-preview each have a horizontal-padding-zeroing
+   shorthand in their own rule above (padding: X 0 Y) — left as-is
+   there intentionally, so desktop's appearance is unchanged from
+   before any of this mobile-margin work. This block re-adds the
+   missing side padding, but only below 600px, so phones still get
+   proper margin from --gutter. Placed at the very end of the file
+   on purpose: with equal CSS specificity, a later rule always wins
+   over an earlier one regardless of media-query nesting, so this
+   must come after the base rules above to actually take effect.
+============================================================ */
+@media (max-width: 600px) {
+  .page-intro          { padding: clamp(2.4rem, 6vw, 5rem) var(--gutter) clamp(2rem, 4vw, 3rem); }
+  .perf-section         { padding: clamp(2rem, 5vw, 4rem) var(--gutter); }
+  .work-basic-info      { padding: 3rem var(--gutter) 1.5rem; }
+  .work-performances    { padding: 3rem var(--gutter); }
+  .work-video-section   { padding: 1rem var(--gutter) 3rem; }
+  .work-score-preview   { padding: 3rem var(--gutter) 5rem; }
 }
