@@ -1295,12 +1295,17 @@ form.contact-form { display: flex; flex-direction: column; gap: 1.3rem; }
   scrollbar-color: rgba(255,255,255,0.18) transparent;
 }
 
-/* Mobile — let the section be taller and use a solid overlay instead of gradient */
+/* Mobile — photo becomes a full-width background (not just the
+   left 42%) behind a fixed-size, internally-scrolling text box,
+   same idea as desktop's scrollable .bio-hero-content but sized
+   for a phone screen so the photo never has to stretch/distort
+   as the visitor switches between the short/medium/long bio tabs. */
 @media (max-width: 720px) {
   .bio-hero           { height: auto; min-height: 480px; }
+  .bio-hero-bg        { width: 100%; }
   .bio-hero-overlay   { background: rgba(8,8,8,0.68); }
   .bio-hero-wrap      { height: auto; padding-top: 3rem; padding-bottom: 3rem; }
-  .bio-hero-content   { margin-left: 0; max-height: none; overflow-y: visible; }
+  .bio-hero-content   { margin-left: 0; max-height: 420px; overflow-y: auto; }
 }
 
 /* Bio switcher buttons — adapted for dark background */
