@@ -1523,8 +1523,16 @@ html[lang="zh-CN"] .lead {
    included too as a defensive measure: iOS Safari's native
    dropdown rendering sometimes ignores its container's width.
    Desktop is unaffected — these rules only apply below 600px.
+
+   UPDATE: overflow-wrap alone wasn't enough — .contact-info is a
+   CSS Grid item, and grid items default to min-width: auto, which
+   keeps them from shrinking below their content's natural size
+   regardless of overflow-wrap. Forcing min-width: 0 on the grid
+   item is the actual fix; overflow-wrap is what makes it wrap
+   inside that now-shrinkable box rather than just clip.
 ============================================================ */
 @media (max-width: 600px) {
+  .contact-info { min-width: 0; }
   .contact-info dd { overflow-wrap: break-word; word-break: break-word; }
   .field select { max-width: 100%; }
 }
