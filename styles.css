@@ -1058,11 +1058,11 @@ p { margin: 0 0 1rem; }
   position: absolute;
   inset: 0;
   margin: auto;
-  width: 68px;
-  height: 48px;
+  width: 92px;
+  height: 64px;
   background: rgba(0,0,0,0.75);
   border: none;
-  border-radius: 12px;
+  border-radius: 14px;
   cursor: pointer;
   transition: background 0.2s;
 }
@@ -1074,7 +1074,7 @@ p { margin: 0 0 1rem; }
   left: 55%;
   transform: translate(-50%, -50%);
   border-style: solid;
-  border-width: 11px 0 11px 19px;
+  border-width: 15px 0 15px 26px;
   border-color: transparent transparent transparent #fff;
 }
 /* Photo boxes — same footprint as .media-video, but for a plain
