@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initWorkDetail();    // Individual work detail page (work.html)
   initContactForm();   // Contact form validation & submission
   initPerformancesAutoArchive(); // Moves past-dated Upcoming rows into Archive
+  initYouTubeFacades(); // Click-to-load YouTube thumbnails on the Media page
   highlightActiveNav();// Bolds the nav link for the current page
 });
 
@@ -389,5 +390,35 @@ function initContactForm() {
       btn.disabled = false;
       btn.innerHTML = 'Send note <span class="arrow">→</span>';
     });
+  });
+}
+
+
+/* ─────────────────────────────────────────────────────
+   YOUTUBE FACADES  (Media page)
+   Each .yt-facade div shows a thumbnail image + play button
+   instead of a live iframe. The real, heavy YouTube iframe
+   (player JS, UI, tracking) only loads once the visitor
+   actually clicks — a big page-weight saving on a page with
+   many embeds most visitors won't watch.
+───────────────────────────────────────────────────── */
+function initYouTubeFacades() {
+  const facades = document.querySelectorAll('.yt-facade');
+  if (!facades.length) return; // Not on the Media page — exit early
+
+  facades.forEach(facade => {
+    facade.addEventListener('click', () => {
+      const id = facade.dataset.ytId;
+
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1`;
+      iframe.title = 'YouTube video player';
+      iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+      iframe.allowFullscreen = true;
+
+      facade.innerHTML = '';
+      facade.appendChild(iframe);
+      facade.classList.remove('yt-facade'); // Stop listening for further clicks
+    }, { once: true });
   });
 }
