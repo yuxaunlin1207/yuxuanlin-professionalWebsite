@@ -366,15 +366,23 @@ nav.primary a.active::after { right: 0; }
     background: var(--paper-warm);
     border: 1px solid var(--ink);
     flex-direction: column; /* Stack links vertically */
+    align-items: flex-start; /* Don't stretch links to the dropdown's full
+      width — without this, flexbox's default "stretch" makes every link's
+      box (and therefore its underline) as wide as the longest link
+      ("Performances"), instead of matching its own text. */
     gap: 0.9rem;
     padding: 1.2rem 1.4rem;
     display: none; /* Hidden until "Menu" is clicked */
   }
   /* The dropdown panel keeps its original light background, so its
      links stay dark/readable here even though nav links are white
-     up in the dark header bar itself */
-  nav.primary a { color: var(--ink-soft); }
-  nav.primary a:hover, nav.primary a.active { color: var(--accent); }
+     up in the dark header bar itself. .lang-btn is a <button>, not
+     an <a>, so it needs its own rule here too — without it, the
+     non-active language button keeps its white desktop-header color
+     and becomes invisible against this light dropdown background. */
+  nav.primary a, .lang-btn { color: var(--ink-soft); }
+  nav.primary a:hover, nav.primary a.active,
+  .lang-btn:hover, .lang-btn.active { color: var(--accent); }
   /* JavaScript adds .open to show the nav */
   nav.primary.open { display: flex; }
 }
