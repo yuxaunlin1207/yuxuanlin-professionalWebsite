@@ -1511,3 +1511,20 @@ html[lang="zh-CN"] .lead {
   .work-video-section   { padding: 1rem var(--gutter) 3rem; }
   .work-score-preview   { padding: 3rem var(--gutter) 5rem; }
 }
+
+
+/* ============================================================
+   20. CONTACT PAGE — phone-only right-edge overflow fix
+   The email address (linyuxuan127+inquires@gmail.com) is one
+   long unbroken string with no spaces, so the browser has no
+   natural place to wrap it — on a narrow phone it can overflow
+   past the right edge of .contact-info, breaking through the
+   margin that's otherwise correct on this page. <select> is
+   included too as a defensive measure: iOS Safari's native
+   dropdown rendering sometimes ignores its container's width.
+   Desktop is unaffected — these rules only apply below 600px.
+============================================================ */
+@media (max-width: 600px) {
+  .contact-info dd { overflow-wrap: break-word; word-break: break-word; }
+  .field select { max-width: 100%; }
+}
