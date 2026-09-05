@@ -1580,3 +1580,34 @@ html[lang="zh-CN"] .lead {
   .contact-info dd { overflow-wrap: break-word; word-break: break-word; }
   .field select { max-width: 100%; }
 }
+
+
+/* ============================================================
+   21. SEND-SUCCESS POPUP  (Contact page)
+   Shown by initContactForm (main.js) after a successful submit.
+============================================================ */
+.popup-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 20, 30, 0.55); /* var(--ink), semi-transparent */
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  cursor: pointer;
+}
+.popup-overlay.show { display: flex; }
+.popup-box {
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 2rem 3.5rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 2.2rem;
+  animation: popIn 0.25s ease;
+}
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}

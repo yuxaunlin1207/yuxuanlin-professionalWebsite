@@ -377,6 +377,7 @@ function initContactForm() {
         status.textContent = '✓ Message sent. Yuxuan will be in touch.';
         status.style.color = 'var(--ink)';
         form.reset();
+        showSentPopup();
       } else {
         status.textContent = '× Something went wrong. Please try again.';
         status.style.color = 'var(--accent)';
@@ -391,6 +392,20 @@ function initContactForm() {
       btn.innerHTML = 'Send note <span class="arrow">→</span>';
     });
   });
+}
+
+/* Shows the "Sent!" popup (#sent-popup in contact.html) for a
+   couple seconds, or until the visitor clicks anywhere to dismiss
+   it early. */
+function showSentPopup() {
+  const popup = document.getElementById('sent-popup');
+  if (!popup) return;
+
+  popup.classList.add('show');
+  const hide = () => popup.classList.remove('show');
+
+  popup.addEventListener('click', hide, { once: true });
+  setTimeout(hide, 2500);
 }
 
 
