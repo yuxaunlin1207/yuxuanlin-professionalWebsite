@@ -377,15 +377,17 @@ function initContactForm() {
         status.textContent = '✓ Message sent. Yuxuan will be in touch.';
         status.style.color = 'var(--ink)';
         form.reset();
-        showSentPopup();
+        showPopup('Sent!');
       } else {
         status.textContent = '× Something went wrong. Please try again.';
         status.style.color = 'var(--accent)';
+        showPopup('Failed to connect, please try again.');
       }
     })
     .catch(() => {
       status.textContent = '× Network error. Please try again.';
       status.style.color = 'var(--accent)';
+      showPopup('Failed to connect, please try again.');
     })
     .finally(() => {
       btn.disabled = false;
@@ -394,13 +396,15 @@ function initContactForm() {
   });
 }
 
-/* Shows the "Sent!" popup (#sent-popup in contact.html) for a
-   couple seconds, or until the visitor clicks anywhere to dismiss
-   it early. */
-function showSentPopup() {
+/* Shows the popup (#sent-popup in contact.html) with the given
+   message for a couple seconds, or until the visitor clicks
+   anywhere to dismiss it early. Used for both the success ("Sent!")
+   and failure ("Failed to connect...") cases. */
+function showPopup(message) {
   const popup = document.getElementById('sent-popup');
   if (!popup) return;
 
+  popup.querySelector('.popup-box').textContent = message;
   popup.classList.add('show');
   const hide = () => popup.classList.remove('show');
 
